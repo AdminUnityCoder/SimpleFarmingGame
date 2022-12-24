@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MyFramework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -129,7 +130,7 @@ namespace SFG.InventorySystem
                 SlotType.Shop => ShopSlotPrefab, SlotType.Box => BoxSlotPrefab, _ => null
             };
 
-            BaseBagPanel.SetActive(true);
+            BaseBagPanel.Show();
             BaseBagSlotList = new List<SlotUI>();
             for (int i = 0; i < bagData.ItemList.Count; ++i)
             {
@@ -143,7 +144,7 @@ namespace SFG.InventorySystem
             if (slotType == SlotType.Shop)
             {
                 PlayerBagGo.GetComponent<RectTransform>().pivot = new Vector2(-1f, 0.5f);
-                PlayerBagGo.SetActive(true);
+                PlayerBagGo.Show();
                 m_IsBagOpened = true;
             }
 
