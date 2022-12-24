@@ -1,0 +1,788 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77530815b1d6f8f45bee8ee866b8ebf5, type: 3}
+  m_Name: 00.Sea
+  m_EditorClassIdentifier: 
+  SceneName: 00.Sea
+  MapWidth: 32
+  MapHeight: 18
+  OriginX: -19
+  OriginY: -9
+  TilePropertyList:
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -9}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -20, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -19, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -18, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -17, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -16, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -15, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -14, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -14, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -14, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -14, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -13, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -12, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -12, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -12, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -12, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -12, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -12, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -11, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -11, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -11, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -11, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -10, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -10, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -10, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -10, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -9, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -9, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -8, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -8, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -8, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -7, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -7, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -7, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -6, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -6, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -5, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -4, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -3, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -3, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -2, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -2, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -1, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: -1, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 0, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 0, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 1, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 1, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 2, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 2, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 3, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 3, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 4, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 4, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 4, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 4, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 5, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 5, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 5, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 5, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 5, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 5, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 6, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 6, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 6, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 6, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 7, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 7, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 7, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 8, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 9, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 10, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 11, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 12, y: 8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -10}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -9}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -8}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: -1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 0}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 1}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 2}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 3}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 4}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 5}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 6}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 7}
+    BoolTypeValue: 1
+  - TileType: 3
+    TileCoordinate: {x: 13, y: 8}
+    BoolTypeValue: 1

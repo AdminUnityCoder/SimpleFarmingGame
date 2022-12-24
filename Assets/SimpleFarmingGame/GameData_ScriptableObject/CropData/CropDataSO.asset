@@ -1,0 +1,548 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e92f8129303f4586a7c581f4bdcb6c0f, type: 3}
+  m_Name: CropDataSO
+  m_EditorClassIdentifier: 
+  CropDetailsList:
+  - CropName: "\u571F\u8C46\u79CD\u5B50"
+    CropSeedID: 1007
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -2058122700, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: 1098745238, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1012976577, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1730499155, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    - {fileID: -1080373613, guid: bd1655396b777431e85369611fc36aed, type: 3}
+    Seasons: 0000000001000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: f9030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u767D\u841D\u535C\u79CD\u5B50"
+    CropSeedID: 1008
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -605721469, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: -1805732352, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: -331841672, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: -1201955594, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    - {fileID: 22577986, guid: 87430ba1a26c4408191e4027950e7133, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: fa030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u7D2B\u841D\u535C\u79CD\u5B50"
+    CropSeedID: 1009
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -1489595994, guid: ba8cb7102384d418883ef909ed3befd5, type: 3}
+    - {fileID: 718811943, guid: ba8cb7102384d418883ef909ed3befd5, type: 3}
+    - {fileID: 1774969089, guid: ba8cb7102384d418883ef909ed3befd5, type: 3}
+    - {fileID: -1256380199, guid: ba8cb7102384d418883ef909ed3befd5, type: 3}
+    - {fileID: -455393919, guid: ba8cb7102384d418883ef909ed3befd5, type: 3}
+    Seasons: 000000000100000002000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: fb030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u8461\u8404\u79CD\u5B50"
+    CropSeedID: 1010
+    GrowthDays: 0200000003000000030000000400000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: 335049101, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -1150923953, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -270931293, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: 546229442, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    - {fileID: -1031843392, guid: 24e3edf5cfa4d468fbdeed1f09a965a8, type: 3}
+    Seasons: 0000000002000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: fc030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 9
+    RegrowTimes: 2
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u84DD\u8393\u79CD\u5B50"
+    CropSeedID: 1011
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -1270250029, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: 1885931999, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: -1817254309, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: 816233219, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    - {fileID: -173135368, guid: 95e7e06c6bf4644f3a4bc7b164e261bf, type: 3}
+    Seasons: 0000000002000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: fd030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u8304\u5B50\u79CD\u5B50"
+    CropSeedID: 1012
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: 1758879028, guid: 2367379c11bac476d8ae816305d1bf35, type: 3}
+    - {fileID: 629908302, guid: 2367379c11bac476d8ae816305d1bf35, type: 3}
+    - {fileID: -2074996742, guid: 2367379c11bac476d8ae816305d1bf35, type: 3}
+    - {fileID: -1775656775, guid: 2367379c11bac476d8ae816305d1bf35, type: 3}
+    - {fileID: 869094605, guid: 2367379c11bac476d8ae816305d1bf35, type: 3}
+    Seasons: 0000000002000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: fe030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u5357\u74DC\u79CD\u5B50"
+    CropSeedID: 1013
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -171679066, guid: 0f8fa26bd67a74039b2bfcc93554e8a2, type: 3}
+    - {fileID: 2025822110, guid: 0f8fa26bd67a74039b2bfcc93554e8a2, type: 3}
+    - {fileID: 1261225977, guid: 0f8fa26bd67a74039b2bfcc93554e8a2, type: 3}
+    - {fileID: 1188135482, guid: 0f8fa26bd67a74039b2bfcc93554e8a2, type: 3}
+    - {fileID: 1454489578, guid: 0f8fa26bd67a74039b2bfcc93554e8a2, type: 3}
+    Seasons: 0000000002000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: ff030000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u7EA2\u8FA3\u6912\u79CD\u5B50"
+    CropSeedID: 1014
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: 1619592865, guid: d51ba492cc4d84616b8153b632a0f330, type: 3}
+    - {fileID: 2133311509, guid: d51ba492cc4d84616b8153b632a0f330, type: 3}
+    - {fileID: 1840255864, guid: d51ba492cc4d84616b8153b632a0f330, type: 3}
+    - {fileID: 1126550860, guid: d51ba492cc4d84616b8153b632a0f330, type: 3}
+    - {fileID: -1700157861, guid: d51ba492cc4d84616b8153b632a0f330, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: 00040000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u897F\u7EA2\u67FF\u79CD\u5B50"
+    CropSeedID: 1015
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -2007405922, guid: cfbc4902a2e4349e2986894ea4d8330b, type: 3}
+    - {fileID: 875008789, guid: cfbc4902a2e4349e2986894ea4d8330b, type: 3}
+    - {fileID: 1324347211, guid: cfbc4902a2e4349e2986894ea4d8330b, type: 3}
+    - {fileID: 1065365656, guid: cfbc4902a2e4349e2986894ea4d8330b, type: 3}
+    - {fileID: 675625077, guid: cfbc4902a2e4349e2986894ea4d8330b, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: 01040000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u897F\u74DC\u79CD\u5B50"
+    CropSeedID: 1016
+    GrowthDays: 0100000002000000020000000300000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    GrowthSprites:
+    - {fileID: -1903213204, guid: 8f2e8097fb3aa4be68e23bead3addf6e, type: 3}
+    - {fileID: 1433627235, guid: 8f2e8097fb3aa4be68e23bead3addf6e, type: 3}
+    - {fileID: 2066509890, guid: 8f2e8097fb3aa4be68e23bead3addf6e, type: 3}
+    - {fileID: 47405303, guid: 8f2e8097fb3aa4be68e23bead3addf6e, type: 3}
+    - {fileID: 2095958316, guid: 8f2e8097fb3aa4be68e23bead3addf6e, type: 3}
+    Seasons: 0000000001000000
+    HarvestToolItemID: ed030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: 02040000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0, y: 0}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 1
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 4
+  - CropName: "\u9488\u53F6\u6728\u79CD\u5B50"
+    CropSeedID: 1027
+    GrowthDays: 0200000003000000030000000400000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 1120552231267250706, guid: 19c21f8e98f0c8f4a87cf3209dc2a240, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: 3979be82862ab4b42be8e0b3222694bc, type: 3}
+    - {fileID: 21300000, guid: b344f2cee7ac54d7ab52e493a1bb4ee7, type: 3}
+    - {fileID: 21300000, guid: c54002cd9727a43329d7f75c50778b57, type: 3}
+    - {fileID: 21300000, guid: 4590cd3fefdd74b22ae749a122189ece, type: 3}
+    - {fileID: 21300000, guid: e12c6f18fb50544fea7f5245a9a2aeff, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: e9030000
+    ToolRequireUsedCount: 05000000
+    TransferNewItemID: 1031
+    HarvestFruitID: 0304000005040000
+    FruitMinAmount: 0100000002000000
+    FruitMaxAmount: 0300000005000000
+    SpawnRadius: {x: 3.5, y: 1.2}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 1
+    HasParticleEffect: 1
+    ParticleEffectType: 1
+    EffectGenerationPosition: {x: 0, y: 2.5, z: 0}
+    SoundEffect: 19
+  - CropName: "\u9614\u53F6\u6728\u79CD\u5B50"
+    CropSeedID: 1028
+    GrowthDays: 0200000003000000030000000400000005000000
+    GrowthPrefabs:
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 8311889949177264453, guid: eff31645bb6b22947ad758a32939a672, type: 3}
+    - {fileID: 3045613352272903377, guid: 268b4116fbf1fbb4e94c2980bc19aace, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: 83539708444bc497b8d9f5bba223cc6f, type: 3}
+    - {fileID: 21300000, guid: 309497be57b084f4da5b2c165ddceca7, type: 3}
+    - {fileID: 21300000, guid: 41bef8696d59f440aa1befb8b23dee5e, type: 3}
+    - {fileID: 21300000, guid: 0a4318b810b0f467fab50a11f472c746, type: 3}
+    - {fileID: 21300000, guid: a21492e2d90cf4f038c4b9ae2600c5ff, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: e9030000
+    ToolRequireUsedCount: 05000000
+    TransferNewItemID: 1032
+    HarvestFruitID: 0404000006040000
+    FruitMinAmount: 0100000002000000
+    FruitMaxAmount: 0300000005000000
+    SpawnRadius: {x: 3.5, y: 1.2}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 1
+    HasParticleEffect: 1
+    ParticleEffectType: 2
+    EffectGenerationPosition: {x: 0, y: 2.5, z: 0}
+    SoundEffect: 19
+  - CropName: "\u9488\u53F6\u6728\u6811\u6839"
+    CropSeedID: 1031
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 2165647920896099907, guid: df7eed9a9b7747a4bba61cac13fd7db5, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: f92caccf9fb8e45bcb3b3b1116dcbf48, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: e9030000
+    ToolRequireUsedCount: 05000000
+    TransferNewItemID: 0
+    HarvestFruitID: 05040000
+    FruitMinAmount: 02000000
+    FruitMaxAmount: 04000000
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 19
+  - CropName: "\u9614\u53F6\u6728\u6811\u6839"
+    CropSeedID: 1032
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 5388945597891472564, guid: 74af85d78facce540ba3c2b01fd20811, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: 774ad8d2636c5457e81a95a3e1f2352d, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: e9030000
+    ToolRequireUsedCount: 05000000
+    TransferNewItemID: 0
+    HarvestFruitID: 06040000
+    FruitMinAmount: 02000000
+    FruitMaxAmount: 04000000
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 0
+    ParticleEffectType: 0
+    EffectGenerationPosition: {x: 0, y: 0, z: 0}
+    SoundEffect: 19
+  - CropName: "\u5C0F\u77F3\u5934"
+    CropSeedID: 1033
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 2679813742812269220, guid: 2976a8b3d52c36f41b0c63e9365a2d67, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: b40fde803efab463bbc950e4d29ee5ce, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: eb030000
+    ToolRequireUsedCount: 03000000
+    TransferNewItemID: 0
+    HarvestFruitID: 0b040000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 1
+    ParticleEffectType: 3
+    EffectGenerationPosition: {x: 0, y: 1.2, z: 0}
+    SoundEffect: 22
+  - CropName: "\u5927\u77F3\u5934"
+    CropSeedID: 1034
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 7771902192585370453, guid: 2a24552afa3f5fd4aaf407e73b21cb58, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: 51532cbb9bf104839b6330f0a739b933, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: eb030000
+    ToolRequireUsedCount: 05000000
+    TransferNewItemID: 0
+    HarvestFruitID: 0b040000
+    FruitMinAmount: 03000000
+    FruitMaxAmount: 05000000
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 1
+    ParticleEffectType: 3
+    EffectGenerationPosition: {x: 0, y: 1.5, z: 0}
+    SoundEffect: 22
+  - CropName: "\u5C0F\u7EFF\u6742\u8349"
+    CropSeedID: 1036
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 369785256832999048, guid: 3b64ea29fb8c6c7459eca7e52c04bdd8, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: 9ae5a331348064d73aa91a952b9e1a41, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: ec030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: 
+    FruitMinAmount: 
+    FruitMaxAmount: 
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 1
+    ParticleEffectType: 4
+    EffectGenerationPosition: {x: 0, y: 1, z: 0}
+    SoundEffect: 23
+  - CropName: "\u5927\u7EFF\u6742\u8349"
+    CropSeedID: 1037
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 8840893687486897322, guid: 11a2099ca9edc8648912e19fcaf2ba7d, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: e6647f7a307d24b65957f4ef34c39562, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: ec030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: 
+    FruitMinAmount: 
+    FruitMaxAmount: 
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 1
+    ParticleEffectType: 4
+    EffectGenerationPosition: {x: 0, y: 1, z: 0}
+    SoundEffect: 23
+  - CropName: "\u5927\u9EC4\u6742\u8349"
+    CropSeedID: 1038
+    GrowthDays: 00000000
+    GrowthPrefabs:
+    - {fileID: 4147932718707081966, guid: 0fe2c679d5f9bc648815b9745cd0498b, type: 3}
+    GrowthSprites:
+    - {fileID: 21300000, guid: 0c055f09a64a74805ad18c1f0b134fec, type: 3}
+    Seasons: 00000000010000000200000003000000
+    HarvestToolItemID: ec030000
+    ToolRequireUsedCount: 01000000
+    TransferNewItemID: 0
+    HarvestFruitID: 0f040000
+    FruitMinAmount: 01000000
+    FruitMaxAmount: 03000000
+    SpawnRadius: {x: 0.5, y: 0.5}
+    DaysToRegrow: 0
+    RegrowTimes: 0
+    IsGeneratedOnPlayerPosition: 0
+    HasAnimation: 0
+    HasParticleEffect: 1
+    ParticleEffectType: 4
+    EffectGenerationPosition: {x: 0, y: 1, z: 0}
+    SoundEffect: 23
