@@ -100,7 +100,7 @@ namespace SFG.InventorySystem
         private void OnDropItemEvent(int itemID, Vector3 mousePosition, ItemType itemType)
         {
             if (itemType == ItemType.Seed) return;
-            Vector3 PlayerPosition = PlayerModel.Instance.GetPosition;
+            Vector3 PlayerPosition = Player.Instance.Position;
             Item item = Instantiate(BounceItemPrefab, PlayerPosition, Quaternion.identity, m_ItemParent);
             item.ItemID = itemID;
             Vector3 direction = (mousePosition - PlayerPosition).normalized;

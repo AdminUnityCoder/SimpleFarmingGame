@@ -7,7 +7,7 @@ using EventSystem = SFG.TransitionSystem.EventSystem;
 
 namespace SimpleFarmingGame.Game
 {
-    internal sealed class PlayerController : MonoBehaviour, IPlayerInput, ISavable
+    internal sealed class PlayerController : MonoBehaviour, IPlayerInput, IPlayer, ISavable
     {
         private Rigidbody2D m_Rigidbody2D; // component
 
@@ -19,8 +19,7 @@ namespace SimpleFarmingGame.Game
         private const float Speed = 5f;
         float IPlayerInput.InputX => m_InputX;
         float IPlayerInput.InputY => m_InputY;
-        bool IPlayerInput.IsMoving => m_IsMoving;
-        Vector3 IPlayerInput.Position => transform.position;
+        bool IPlayer.IsMoving => m_IsMoving;
 
         bool IPlayerInput.InputDisable
         {

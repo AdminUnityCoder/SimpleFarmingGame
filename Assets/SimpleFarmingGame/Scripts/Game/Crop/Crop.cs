@@ -62,7 +62,7 @@ namespace SFG.CropSystem
                 else if (CropDetails.HasAnimation)
                 {
                     m_Animator.SetTrigger
-                        (PlayerModel.Instance.GetPosition.x < transform.position.x ? FallingRight : FallingLeft);
+                        (Player.Instance.Position.x < transform.position.x ? FallingRight : FallingLeft);
 
                     AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.TreeFalling);
                     StartCoroutine(HarvestAfterAnimationCoroutine());
@@ -75,7 +75,7 @@ namespace SFG.CropSystem
                 {
                     m_Animator.SetTrigger
                     (
-                        PlayerModel.Instance.GetPosition.x < transform.position.x
+                        Player.Instance.Position.x < transform.position.x
                             ? RotateRight
                             : RotateLeft
                     );
@@ -123,7 +123,7 @@ namespace SFG.CropSystem
                     {
                         // 判断物品应该生成的方向
                         m_CropPosition = transform.position;
-                        int directionX = m_CropPosition.x > PlayerModel.Instance.GetPosition.x ? 1 : -1;
+                        int directionX = m_CropPosition.x > Player.Instance.Position.x ? 1 : -1;
                         // 物品生成的位置
                         Vector3 spawnPosition = new Vector3
                         (
