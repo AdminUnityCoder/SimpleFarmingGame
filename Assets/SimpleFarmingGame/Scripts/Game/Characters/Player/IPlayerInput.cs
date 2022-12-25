@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SFG.Characters.Player
+namespace SimpleFarmingGame.Game
 {
     internal interface IPlayerInput
     {
@@ -8,6 +8,6 @@ namespace SFG.Characters.Player
         float InputY { get; }
         bool IsMoving { get; }
         Vector3 Position { get; }
-        bool InputDisable { get; set; }
+        bool InputDisable { set; }
     }
 }

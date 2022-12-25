@@ -5,10 +5,9 @@ using SFG.Save;
 using UnityEngine;
 using EventSystem = SFG.TransitionSystem.EventSystem;
 
-namespace SFG.Characters.Player
+namespace SimpleFarmingGame.Game
 {
-    // Control player input and movement
-    internal sealed class PlayerInput : MonoBehaviour, IPlayerInput, ISavable
+    internal sealed class PlayerController : MonoBehaviour, IPlayerInput, ISavable
     {
         private Rigidbody2D m_Rigidbody2D; // component
 
@@ -25,7 +24,6 @@ namespace SFG.Characters.Player
 
         bool IPlayerInput.InputDisable
         {
-            get => m_InputDisable;
             set => m_InputDisable = value;
         }
 
@@ -35,30 +33,28 @@ namespace SFG.Characters.Player
             m_InputDisable = true;
         }
 
+        private void OnEnable()
+        {
+            EventSystem.BeforeSceneUnloadedEvent += DisableInput;                // TransitionManager
+            EventSystem.AfterSceneLoadedEvent += EnableInput;                    // TransitionManager
+            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;            // TransitionManager
+            SFG.Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent; // Game
+            SFG.UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;         // UI
+            SFG.UI.EventSystem.EndGameEvent += OnEndGameEvent;
+        }
+
         private void Start()
         {
             ISavable savable = this;
             savable.RegisterSavable();
         }
 
-        private void OnEnable()
+        private void FixedUpdate()
         {
-            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent; // TransitionManager
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;       // TransitionManager
-            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;           // TransitionManager
-            Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;    // Game
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;            // UI
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
-        }
-
-        private void OnDisable()
-        {
-            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent; // TransitionManager
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;       // TransitionManager
-            EventSystem.MoveToPositionEvent -= OnMoveToPositionEvent;           // TransitionManager
-            Game.EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
-            UI.EventSystem.EndGameEvent -= OnEndGameEvent;
+            if (m_InputDisable == false)
+            {
+                Movement();
+            }
         }
 
         private void Update()
@@ -73,13 +69,17 @@ namespace SFG.Characters.Player
             }
         }
 
-        private void FixedUpdate()
+        private void OnDisable()
         {
-            if (m_InputDisable == false)
-            {
-                Movement();
-            }
+            EventSystem.BeforeSceneUnloadedEvent -= DisableInput;     // TransitionManager
+            EventSystem.AfterSceneLoadedEvent -= EnableInput;         // TransitionManager
+            EventSystem.MoveToPositionEvent -= OnMoveToPositionEvent; // TransitionManager
+            SFG.Game.EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+            SFG.UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
+            SFG.UI.EventSystem.EndGameEvent -= OnEndGameEvent;
         }
+
+        #region Move
 
         private void MoveInput()
         {
@@ -105,23 +105,22 @@ namespace SFG.Characters.Player
         private void Movement() =>
             m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + Speed * Time.deltaTime * m_MovementInput);
 
-        private void OnBeforeSceneUnloadedEvent() => m_InputDisable = true; // Disable input, player can not move.
+        #endregion
 
-        private void OnAfterSceneLoadedEvent() => m_InputDisable = false; // Enable input, player can move.
+        #region Event
+
+        private void DisableInput() => m_InputDisable = true;
+
+        private void EnableInput() => m_InputDisable = false;
 
         private void OnMoveToPositionEvent(Vector3 targetPosition) => transform.position = targetPosition;
 
         private void OnUpdateGameStateEvent(GameState gameState)
         {
-            switch (gameState)
+            m_InputDisable = gameState switch
             {
-                case GameState.Gameplay:
-                    m_InputDisable = false;
-                    break;
-                case GameState.Pause:
-                    m_InputDisable = true;
-                    break;
-            }
+                GameState.Gameplay => false, GameState.Pause => true, _ => m_InputDisable
+            };
         }
 
         private void OnStartNewGameEvent(int obj)
@@ -130,10 +129,11 @@ namespace SFG.Characters.Player
             transform.position = new Vector3(0f, -3f, 0f);
         }
 
-        private void OnEndGameEvent()
-        {
-            m_InputDisable = true;
-        }
+        private void OnEndGameEvent() => m_InputDisable = true;
+
+        #endregion
+
+        #region Save
 
         public string GUID => GetComponent<DataGUID>().GUID;
 
@@ -159,5 +159,7 @@ namespace SFG.Characters.Player
             Vector3 targetPosition = saveData.CharactersPosDict[name].ToVector3();
             transform.position = targetPosition;
         }
+
+        #endregion
     }
 }

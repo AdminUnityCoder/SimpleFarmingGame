@@ -1,5 +1,5 @@
 using System;
-using SFG.Characters.Player;
+using SimpleFarmingGame.Game;
 using SFG.CropSystem;
 using SFG.InventorySystem;
 using SFG.MapSystem;

@@ -1,7 +1,7 @@
 ﻿using SFG.AudioSystem;
 using UnityEngine;
 
-namespace SFG.Characters.Player
+namespace SimpleFarmingGame.Game
 {
     /// <summary>
     /// 给 Animation 添加 Event，用于播放 Sound

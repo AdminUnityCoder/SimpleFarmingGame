@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SFG.InventorySystem;
 using UnityEngine;
 
-namespace SFG.Characters.Player
+namespace SimpleFarmingGame.Game
 {
     internal enum PlayerActionEnum { None, Carry, Hoe, Break, Water, Collect, Chop, Reap }
 
@@ -64,17 +64,17 @@ namespace SFG.Characters.Player
         private void OnEnable()
         {
             EventSystem.ItemSelectedEvent += OnItemSelectedEvent; // InventorySystem
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            CursorSystem.EventSystem.MouseClickedEvent += OnMouseClickedEvent;
-            CropSystem.EventSystem.SpawnFruitAtPlayerPosition += DisplayHarvestFruitSprite;
+            SFG.TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            SFG.CursorSystem.EventSystem.MouseClickedEvent += OnMouseClickedEvent;
+            SFG.CropSystem.EventSystem.SpawnFruitAtPlayerPosition += DisplayHarvestFruitSprite;
         }
 
         private void OnDisable()
         {
             EventSystem.ItemSelectedEvent -= OnItemSelectedEvent; // InventorySystem
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            CursorSystem.EventSystem.MouseClickedEvent += OnMouseClickedEvent;
-            CropSystem.EventSystem.SpawnFruitAtPlayerPosition -= DisplayHarvestFruitSprite;
+            SFG.TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            SFG.CursorSystem.EventSystem.MouseClickedEvent += OnMouseClickedEvent;
+            SFG.CropSystem.EventSystem.SpawnFruitAtPlayerPosition -= DisplayHarvestFruitSprite;
         }
         
         private void Start()
@@ -137,7 +137,7 @@ namespace SFG.Characters.Player
             if (m_IsUsingTool) return;
             if (itemDetails.ItemType is ItemType.Seed or ItemType.Commodity or ItemType.Furniture)
             {
-                CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
+                SFG.CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
             }
             else // if use tool
             {
@@ -228,7 +228,7 @@ namespace SFG.Characters.Player
             }
 
             yield return m_WaitForPlayAPartOfAnimation;
-            CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
+            SFG.CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
             yield return m_WaitForPlayRestOfAnimation;
             m_IsUsingTool = false;
             PlayerModel.Instance.EnableInput();

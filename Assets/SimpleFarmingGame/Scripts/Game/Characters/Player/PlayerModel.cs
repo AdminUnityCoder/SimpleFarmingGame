@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SFG.Characters.Player
+namespace SimpleFarmingGame.Game
 {
     public sealed class PlayerModel : MonoBehaviour
     {

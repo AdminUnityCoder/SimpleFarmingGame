@@ -1,7 +1,7 @@
 ﻿using SFG.Interface;
 using UnityEngine;
 
-namespace SFG.Characters.Player
+namespace SimpleFarmingGame.Game
 {
     public class ItemFaderTrigger : MonoBehaviour
     {

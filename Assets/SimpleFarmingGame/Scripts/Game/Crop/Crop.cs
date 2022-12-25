@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using SFG.AudioSystem;
-using SFG.Characters.Player;
+using SimpleFarmingGame.Game;
 using SFG.InventorySystem;
 using SFG.MapSystem;
 using UnityEngine;

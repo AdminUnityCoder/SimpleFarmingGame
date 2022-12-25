@@ -1,4 +1,4 @@
-﻿using SFG.Characters.Player;
+﻿using SimpleFarmingGame.Game;
 using UnityEngine;
 
 namespace SFG.CropSystem
