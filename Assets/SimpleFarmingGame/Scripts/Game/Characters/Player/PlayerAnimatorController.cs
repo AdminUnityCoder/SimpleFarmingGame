@@ -90,13 +90,13 @@ namespace SimpleFarmingGame.Game
 
             foreach (Animator animator in m_Animators)
             {
-                animator.SetBool(IsMoving, PlayerModel.Instance.GetIsMoving);
+                animator.SetBool(IsMoving, Player.Instance.IsMoving);
                 animator.SetFloat(MouseX, m_MouseX);
                 animator.SetFloat(MouseY, m_MouseY);
 
-                if (PlayerModel.Instance.GetIsMoving == false) continue;
-                animator.SetFloat(InputX, PlayerModel.Instance.GetInputX);
-                animator.SetFloat(InputY, PlayerModel.Instance.GetInputY);
+                if (Player.Instance.IsMoving == false) continue;
+                animator.SetFloat(InputX, Player.Instance.InputX);
+                animator.SetFloat(InputY, Player.Instance.InputY);
             }
 
             #endregion
@@ -141,8 +141,8 @@ namespace SimpleFarmingGame.Game
             }
             else // if use tool
             {
-                m_MouseX = mouseWorldPosition.x - PlayerModel.Instance.GetPosition.x;
-                m_MouseY = mouseWorldPosition.y - (PlayerModel.Instance.GetPosition.y + 0.85f);
+                m_MouseX = mouseWorldPosition.x - Player.Instance.Position.x;
+                m_MouseY = mouseWorldPosition.y - (Player.Instance.Position.y + 0.85f);
 
                 if (Mathf.Abs(m_MouseX) > Mathf.Abs(m_MouseY)) { m_MouseY = 0; }
                 else { m_MouseX = 0; }
@@ -216,7 +216,7 @@ namespace SimpleFarmingGame.Game
         private IEnumerator UseToolCoroutine(Vector3 mouseWorldPosition, ItemDetails itemDetails)
         {
             m_IsUsingTool = true;
-            PlayerModel.Instance.DisableInput();
+            Player.Instance.DisableInput();
             yield return null;
 
             // Modify the rotation direction of the player
@@ -231,7 +231,7 @@ namespace SimpleFarmingGame.Game
             SFG.CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
             yield return m_WaitForPlayRestOfAnimation;
             m_IsUsingTool = false;
-            PlayerModel.Instance.EnableInput();
+            Player.Instance.EnableInput();
         }
 
         // 显示收获果实图片协程

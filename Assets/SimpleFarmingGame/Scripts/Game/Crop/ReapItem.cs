@@ -35,7 +35,7 @@ namespace SFG.CropSystem
                     {
                         // 判断物品应该生成的方向
                         m_CropPosition = transform.position;
-                        int directionX = m_CropPosition.x > PlayerModel.Instance.GetPosition.x ? 1 : -1;
+                        int directionX = m_CropPosition.x > Player.Instance.Position.x ? 1 : -1;
                         // 物品生成的位置
                         Vector3 spawnPosition = new Vector3(
                             m_CropPosition.x + Random.Range(directionX, m_CropDetails.SpawnRadius.x * directionX)

@@ -171,7 +171,7 @@ namespace SFG.CursorSystem
 
             m_MouseGridPosition = m_CurrentGrid.WorldToCell(m_MouseWorldPosition);
 
-            Vector3Int playerGridPosition = m_CurrentGrid.WorldToCell(PlayerModel.Instance.GetPosition);
+            Vector3Int playerGridPosition = m_CurrentGrid.WorldToCell(Player.Instance.Position);
             m_BuildImage.rectTransform.position = Input.mousePosition;
 
             if (Mathf.Abs(m_MouseGridPosition.x - playerGridPosition.x) > m_CurrentItemDetails.ItemUseRadius
