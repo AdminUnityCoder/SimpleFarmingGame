@@ -4,11 +4,11 @@ namespace SimpleFarmingGame.Game
 {
     public sealed class Player : MonoBehaviour
     {
+        public const float SPEED = 5f;
         private static Player s_Instance;
         private IPlayer m_Player;
         private IPlayerInput m_PlayerInput;
         public static Player Instance => s_Instance;
-
         public Vector3 Position => transform.position;
         public bool IsMoving => m_Player.IsMoving;
         public float InputX => m_PlayerInput.InputX;

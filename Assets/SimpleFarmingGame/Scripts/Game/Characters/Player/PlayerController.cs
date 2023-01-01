@@ -7,53 +7,28 @@ using EventSystem = SFG.TransitionSystem.EventSystem;
 
 namespace SimpleFarmingGame.Game
 {
-    internal sealed class PlayerController : MonoBehaviour, IPlayerInput, IPlayer, ISavable
+    public sealed class PlayerController : MonoBehaviour, IPlayerInput, IPlayer, ISavable
     {
-        private Rigidbody2D m_Rigidbody2D; // component
-
-        private Vector2 m_MovementInput;
+        private float m_DeltaTime;
+        private bool m_InputDisable;
         private float m_InputX;
         private float m_InputY;
         private bool m_IsMoving;
-        private bool m_InputDisable;
-        private const float Speed = 5f;
-        float IPlayerInput.InputX => m_InputX;
-        float IPlayerInput.InputY => m_InputY;
-        bool IPlayer.IsMoving => m_IsMoving;
 
-        bool IPlayerInput.InputDisable
-        {
-            set => m_InputDisable = value;
-        }
+        private Vector2 m_MovementInput;
+        private Rigidbody2D m_Rigidbody2D; // component
 
         private void Awake()
         {
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
             m_InputDisable = true;
-        }
-
-        private void OnEnable()
-        {
-            EventSystem.BeforeSceneUnloadedEvent += DisableInput;                // TransitionManager
-            EventSystem.AfterSceneLoadedEvent += EnableInput;                    // TransitionManager
-            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;            // TransitionManager
-            SFG.Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent; // Game
-            SFG.UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;         // UI
-            SFG.UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            m_DeltaTime = Time.deltaTime;
         }
 
         private void Start()
         {
             ISavable savable = this;
             savable.RegisterSavable();
-        }
-
-        private void FixedUpdate()
-        {
-            if (m_InputDisable == false)
-            {
-                Movement();
-            }
         }
 
         private void Update()
@@ -68,6 +43,24 @@ namespace SimpleFarmingGame.Game
             }
         }
 
+        private void FixedUpdate()
+        {
+            if (m_InputDisable == false)
+            {
+                Movement();
+            }
+        }
+
+        private void OnEnable()
+        {
+            EventSystem.BeforeSceneUnloadedEvent += DisableInput;                // TransitionManager
+            EventSystem.AfterSceneLoadedEvent += EnableInput;                    // TransitionManager
+            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;            // TransitionManager
+            SFG.Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent; // Game
+            SFG.UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;         // UI
+            SFG.UI.EventSystem.EndGameEvent += OnEndGameEvent;
+        }
+
         private void OnDisable()
         {
             EventSystem.BeforeSceneUnloadedEvent -= DisableInput;     // TransitionManager
@@ -76,6 +69,15 @@ namespace SimpleFarmingGame.Game
             SFG.Game.EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
             SFG.UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
             SFG.UI.EventSystem.EndGameEvent -= OnEndGameEvent;
+        }
+
+        bool IPlayer.IsMoving => m_IsMoving;
+        float IPlayerInput.InputX => m_InputX;
+        float IPlayerInput.InputY => m_InputY;
+
+        bool IPlayerInput.InputDisable
+        {
+            set => m_InputDisable = value;
         }
 
         #region Move
@@ -101,8 +103,10 @@ namespace SimpleFarmingGame.Game
             m_IsMoving = m_MovementInput != Vector2.zero;
         }
 
-        private void Movement() =>
-            m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + Speed * Time.deltaTime * m_MovementInput);
+        private void Movement()
+        {
+            m_Rigidbody2D.MovePosition(m_Rigidbody2D.position + Player.SPEED * m_DeltaTime * m_MovementInput);
+        }
 
         #endregion
 

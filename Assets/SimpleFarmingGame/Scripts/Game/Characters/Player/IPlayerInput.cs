@@ -1,6 +1,6 @@
 ﻿namespace SimpleFarmingGame.Game
 {
-    internal interface IPlayerInput
+    public interface IPlayerInput
     {
         float InputX { get; }
         float InputY { get; }

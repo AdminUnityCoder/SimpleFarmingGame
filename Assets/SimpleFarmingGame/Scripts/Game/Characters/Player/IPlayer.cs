@@ -1,6 +1,6 @@
 ﻿namespace SimpleFarmingGame.Game
 {
-    internal interface IPlayer
+    public interface IPlayer
     {
         bool IsMoving { get; }
     }
