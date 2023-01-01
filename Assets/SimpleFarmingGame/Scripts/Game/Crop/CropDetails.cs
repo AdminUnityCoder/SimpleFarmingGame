@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using SFG.AudioSystem;
-using SFG.TimeSystem;
 using UnityEngine;
 
-namespace SFG.CropSystem
+namespace SimpleFarmingGame.Game
 {
     [Serializable]
     public class CropDetails
@@ -37,6 +35,7 @@ namespace SFG.CropSystem
         [Header("其他选项")]
         [Tooltip("是否在玩家身上生成")]
         public bool IsGeneratedOnPlayerPosition;
+
         [Tooltip("是否有动画")] public bool HasAnimation;
         [Tooltip("是否有粒子特效")] public bool HasParticleEffect;
 

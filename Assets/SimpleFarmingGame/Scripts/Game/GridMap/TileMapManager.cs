@@ -1,33 +1,10 @@
-using System;
 using System.Collections.Generic;
-using SFG.AudioSystem;
-using SFG.CropSystem;
-using SFG.InventorySystem;
-using SFG.Save;
-using SFG.TimeSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-namespace SFG.MapSystem
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
-    {
-        public static event Action RefreshCurrentSceneMap;
-
-        public static void CallRefreshCurrentSceneMap()
-        {
-            RefreshCurrentSceneMap?.Invoke();
-        }
-
-        public static event Action<int, Vector3> BuildFurnitureEvent;
-
-        public static void CallBuildFurnitureEvent(int buildingPaperID, Vector3 mouseWorldPosition)
-        {
-            BuildFurnitureEvent?.Invoke(buildingPaperID, mouseWorldPosition);
-        }
-    }
-
     public class TileMapManager : Singleton<TileMapManager>, ISavable
     {
         [Header("地图信息")] public List<MapDataSO> MapDataList;
@@ -53,17 +30,17 @@ namespace SFG.MapSystem
 
         private void OnEnable()
         {
-            CursorSystem.EventSystem.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimation;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            TimeSystem.EventSystem.GameDayChangeEvent += OnGameDayChangeEvent;
+            EventSystem.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimation;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.GameDayChangeEvent += OnGameDayChangeEvent;
             EventSystem.RefreshCurrentSceneMap += RefreshMap;
         }
 
         private void OnDisable()
         {
-            CursorSystem.EventSystem.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimation;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            TimeSystem.EventSystem.GameDayChangeEvent -= OnGameDayChangeEvent;
+            EventSystem.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimation;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.GameDayChangeEvent -= OnGameDayChangeEvent;
             EventSystem.RefreshCurrentSceneMap -= RefreshMap;
         }
 
@@ -89,17 +66,17 @@ namespace SFG.MapSystem
                 switch (itemDetails.ItemType)
                 {
                     case ItemType.Seed:
-                        CropSystem.EventSystem.CallUpdateSceneCropEvent(itemDetails.ItemID, currentTileDetails);
-                        InventorySystem.EventSystem.CallDropItemEvent
+                        EventSystem.CallUpdateSceneCropEvent(itemDetails.ItemID, currentTileDetails);
+                        EventSystem.CallDropItemEvent
                         (
                             itemDetails.ItemID
                           , mouseWorldPosition
                           , itemDetails.ItemType
                         );
-                        AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.PlantSeed);
+                        EventSystem.CallPlaySoundEvent(SoundName.PlantSeed);
                         break;
                     case ItemType.Commodity:
-                        InventorySystem.EventSystem.CallDropItemEvent
+                        EventSystem.CallDropItemEvent
                         (
                             itemDetails.ItemID
                           , mouseWorldPosition
@@ -112,13 +89,13 @@ namespace SFG.MapSystem
                         currentTileDetails.CanDig = false;
                         currentTileDetails.CanDropItem = false;
                         // TODO: Sound Effect
-                        AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.Hoe);
+                        EventSystem.CallPlaySoundEvent(SoundName.Hoe);
                         break;
                     case ItemType.WaterTool:
                         SetWaterGround(currentTileDetails);
                         currentTileDetails.DaysSinceWatered = 0;
                         // TODO: Sound Effect
-                        AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.WateringCan);
+                        EventSystem.CallPlaySoundEvent(SoundName.WateringCan);
                         break;
                     case ItemType.PickAxeTool:
                     case ItemType.AxeTool:
@@ -140,7 +117,7 @@ namespace SFG.MapSystem
                         int reapGrassCount = 0;
                         foreach (ReapItem grass in m_GrassList)
                         {
-                            CropSystem.EventSystem.CallParticleEffectEvent
+                            EventSystem.CallParticleEffectEvent
                             (
                                 ParticleEffectType.Grass
                               , grass.transform.position + Vector3.up
@@ -154,7 +131,7 @@ namespace SFG.MapSystem
                             }
                         }
 
-                        AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.Scythe);
+                        EventSystem.CallPlaySoundEvent(SoundName.Scythe);
 
                         break;
                     case ItemType.Furniture:
@@ -178,7 +155,7 @@ namespace SFG.MapSystem
 
             if (m_HasBeenLoadedSceneDict[SceneManager.GetActiveScene().name] == true)
             {
-                CropSystem.EventSystem.CallPreGeneratedCropsEvent(); // 预先生成农作物
+                EventSystem.CallPreGeneratedCropsEvent(); // 预先生成农作物
                 m_HasBeenLoadedSceneDict[SceneManager.GetActiveScene().name] = false;
             }
 
@@ -337,7 +314,7 @@ namespace SFG.MapSystem
                     if (tileDetails.DaysSinceWatered > -1) SetWaterGround(tileDetails);
 
                     if (tileDetails.SeedItemID > -1)
-                        CropSystem.EventSystem.CallUpdateSceneCropEvent(tileDetails.SeedItemID, tileDetails);
+                        EventSystem.CallUpdateSceneCropEvent(tileDetails.SeedItemID, tileDetails);
                 }
             }
         }

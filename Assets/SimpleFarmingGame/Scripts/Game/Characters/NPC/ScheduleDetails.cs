@@ -1,9 +1,8 @@
 ﻿using System;
-using SFG.TimeSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     [Serializable]
     public class ScheduleDetails : IComparable<ScheduleDetails>

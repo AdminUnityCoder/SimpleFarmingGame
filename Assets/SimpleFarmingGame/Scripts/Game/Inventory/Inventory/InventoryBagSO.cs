@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
+    public enum InventoryLocation { Player, Box }
+
     [Serializable]
     public struct InventoryItem
     {

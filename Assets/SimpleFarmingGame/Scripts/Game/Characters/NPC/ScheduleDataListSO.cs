@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     [CreateAssetMenu(fileName = "ScheduleDataListSO", menuName = "ScriptableObject/NPC Schedule/ScheduleDataList")]
     public class ScheduleDataListSO : ScriptableObject

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SFG.AStar
+namespace SimpleFarmingGame.Game
 {
     public class Node : IComparable<Node>
     {

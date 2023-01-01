@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using SFG.AStar;
-using SFG.InventorySystem;
-using SFG.Save;
-using SFG.TimeSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     public static class GridModel
     {
@@ -92,20 +88,20 @@ namespace SFG.Characters.NPC
 
         private void OnEnable()
         {
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            TimeSystem.EventSystem.GameHourMinuteChangeEvent += OnGameHourMinuteChangeEvent;
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.GameHourMinuteChangeEvent += OnGameHourMinuteChangeEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            TimeSystem.EventSystem.GameHourMinuteChangeEvent -= OnGameHourMinuteChangeEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.GameHourMinuteChangeEvent -= OnGameHourMinuteChangeEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void Start()
@@ -268,7 +264,7 @@ namespace SFG.Characters.NPC
                 if (speed <= m_MaxSpeed)
                 {
                     while (Vector3.Distance(transform.position, m_NextGridWorldPosition)
-                         > GridModel.PixelSize)
+                      > GridModel.PixelSize)
                     {
                         m_Direction = (m_NextGridWorldPosition - transform.position).normalized;
                         Vector2 positionOffset = new Vector2
@@ -306,7 +302,7 @@ namespace SFG.Characters.NPC
             // 同场景
             if (scheduleDetails.TargetSceneName == m_CurrentScene)
             {
-                AStar.AStar.Instance.BuildPath
+                AStar.Instance.BuildPath
                 (
                     scheduleDetails.TargetSceneName
                   , (Vector2Int)m_CurrentGridPosition
@@ -353,7 +349,7 @@ namespace SFG.Characters.NPC
                             gotoPos = route.GotoGridCell;
                         }
 
-                        AStar.AStar.Instance.BuildPath(route.SceneName, fromPos, gotoPos, m_MovementStepStack);
+                        AStar.Instance.BuildPath(route.SceneName, fromPos, gotoPos, m_MovementStepStack);
                     }
                 }
             }
@@ -420,7 +416,7 @@ namespace SFG.Characters.NPC
         private bool IsMoveInObliqueDirection(MovementStep currentStep, MovementStep previousStep)
         {
             return currentStep.GridCoordinate.x != previousStep.GridCoordinate.x
-                && currentStep.GridCoordinate.y != previousStep.GridCoordinate.y;
+             && currentStep.GridCoordinate.y    != previousStep.GridCoordinate.y;
         }
 
         /// <summary>

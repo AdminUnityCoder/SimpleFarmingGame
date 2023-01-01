@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using SimpleFarmingGame.Game;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public enum ItemType
     {

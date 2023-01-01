@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SFG.AStar
+namespace SimpleFarmingGame.Game
 {
     /// <summary>
     /// 移动步骤

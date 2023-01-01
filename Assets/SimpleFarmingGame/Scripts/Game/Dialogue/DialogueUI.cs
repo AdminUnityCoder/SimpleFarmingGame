@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.DialogueSystem
+namespace SimpleFarmingGame.Game
 {
     public class DialogueUI : MonoBehaviour
     {

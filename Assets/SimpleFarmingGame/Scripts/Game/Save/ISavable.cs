@@ -1,4 +1,4 @@
-﻿namespace SFG.Save
+﻿namespace SimpleFarmingGame.Game
 {
     public interface ISavable
     {

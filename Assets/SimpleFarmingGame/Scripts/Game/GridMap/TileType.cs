@@ -1,4 +1,4 @@
-namespace SFG.MapSystem
+namespace SimpleFarmingGame.Game
 {
     public enum TileType
     {

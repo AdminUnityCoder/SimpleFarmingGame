@@ -1,8 +1,7 @@
 using System.Collections;
-using SFG.AudioSystem;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class ItemInteractive : MonoBehaviour
     {
@@ -20,7 +19,7 @@ namespace SFG.InventorySystem
                         ? ShakeRightCoroutine()
                         : ShakeLeftCoroutine()
                 );
-                AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.Rustle);
+                EventSystem.CallPlaySoundEvent(SoundName.Rustle);
             }
         }
 
@@ -35,7 +34,7 @@ namespace SFG.InventorySystem
                         ? ShakeRightCoroutine()
                         : ShakeLeftCoroutine()
                 );
-                AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.Rustle);
+                EventSystem.CallPlaySoundEvent(SoundName.Rustle);
             }
         }
 

@@ -1,19 +1,7 @@
-using System;
-using SFG.MapSystem;
 using UnityEngine;
 
-namespace SFG.CropSystem
+namespace SimpleFarmingGame.Game
 {
-    public static partial class EventSystem
-    {
-        public static event Action PreGeneratedCropsEvent;
-
-        public static void CallPreGeneratedCropsEvent()
-        {
-            PreGeneratedCropsEvent?.Invoke();
-        }
-    }
-
     public class CropGenerator : MonoBehaviour
     {
         private Grid m_CurrentGrid;

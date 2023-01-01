@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class Box : MonoBehaviour
     {
@@ -25,19 +25,19 @@ namespace SFG.InventorySystem
         {
             if (m_IsOpened == false && m_CanOpen && Input.GetMouseButtonDown(1))
             {
-                Characters.NPC.EventSystem.CallBaseBagOpenEvent(SlotType.Box, BoxBagData);
+                Game.EventSystem.CallBaseBagOpenEvent(SlotType.Box, BoxBagData);
                 m_IsOpened = true;
             }
 
             if (m_CanOpen == false && m_IsOpened)
             {
-                Characters.NPC.EventSystem.CallBaseBagCloseEvent(SlotType.Box, BoxBagData);
+                Game.EventSystem.CallBaseBagCloseEvent(SlotType.Box, BoxBagData);
                 m_IsOpened = false;
             }
 
             if (m_IsOpened && Input.GetKeyDown(KeyCode.Escape))
             {
-                Characters.NPC.EventSystem.CallBaseBagCloseEvent(SlotType.Box, BoxBagData);
+                Game.EventSystem.CallBaseBagCloseEvent(SlotType.Box, BoxBagData);
                 m_IsOpened = false;
             }
         }

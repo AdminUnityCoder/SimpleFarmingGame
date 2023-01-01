@@ -2,7 +2,7 @@
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace SFG.TimelineSystem
+namespace SimpleFarmingGame.Game
 {
     /*
      * PlayableAsset: 一个基类，适用于可在运行时用于实例化 Playable 的资源
@@ -15,7 +15,7 @@ namespace SFG.TimelineSystem
 
         public override Playable CreatePlayable(PlayableGraph graph, GameObject owner)
         {
-            ScriptPlayable<DialogueBehaviour> playable = 
+            ScriptPlayable<DialogueBehaviour> playable =
                 ScriptPlayable<DialogueBehaviour>.Create(graph, DialogueBehaviour);
             return playable;
         }

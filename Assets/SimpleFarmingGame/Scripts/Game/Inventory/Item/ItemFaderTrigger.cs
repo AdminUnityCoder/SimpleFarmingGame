@@ -1,5 +1,4 @@
-﻿using SFG.Interface;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SimpleFarmingGame.Game
 {

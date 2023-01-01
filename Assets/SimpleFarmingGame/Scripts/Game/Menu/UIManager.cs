@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
-using SFG.AudioSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.UI
+namespace SimpleFarmingGame.Game
 {
     public class UIManager : MonoBehaviour
     {
@@ -23,12 +22,12 @@ namespace SFG.UI
 
         private void OnEnable()
         {
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
 
         private void Start()

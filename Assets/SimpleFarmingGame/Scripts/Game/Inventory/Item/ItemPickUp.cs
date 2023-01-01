@@ -1,7 +1,6 @@
-using SFG.AudioSystem;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class ItemPickUp : MonoBehaviour
     {
@@ -14,7 +13,7 @@ namespace SFG.InventorySystem
                     if (item.ItemDetails.CanPickedUp)
                     {
                         InventoryManager.Instance.AddItemInBag(item, true);
-                        AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.PickupPop);
+                        EventSystem.CallPlaySoundEvent(SoundName.PickupPop);
                     }
                 }
             }

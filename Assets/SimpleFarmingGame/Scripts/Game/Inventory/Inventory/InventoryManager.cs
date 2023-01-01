@@ -1,21 +1,8 @@
-using System;
 using System.Collections.Generic;
-using SFG.Save;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
-    public enum InventoryLocation { Player, Box }
-
-    public static partial class EventSystem
-    {
-        public static Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
-
-        public static void CallUpdateInventoryUI(InventoryLocation location, List<InventoryItem> itemList)
-        {
-            UpdateInventoryUI?.Invoke(location, itemList);
-        }
-    }
 
     public class InventoryManager : Singleton<InventoryManager>, ISavable
     {
@@ -32,19 +19,19 @@ namespace SFG.InventorySystem
         private void OnEnable()
         {
             EventSystem.DropItemEvent += OnDropItemEvent;
-            CropSystem.EventSystem.SpawnFruitAtPlayerPosition += SpawnFruitAtPlayerBag;
-            MapSystem.EventSystem.BuildFurnitureEvent += OnBuildFurnitureEvent;
-            Characters.NPC.EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent; // UI
+            EventSystem.SpawnFruitAtPlayerPosition += SpawnFruitAtPlayerBag;
+            EventSystem.BuildFurnitureEvent += OnBuildFurnitureEvent;
+            EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent; // UI
         }
 
         private void OnDisable()
         {
             EventSystem.DropItemEvent -= OnDropItemEvent;
-            CropSystem.EventSystem.SpawnFruitAtPlayerPosition -= SpawnFruitAtPlayerBag;
-            MapSystem.EventSystem.BuildFurnitureEvent -= OnBuildFurnitureEvent;
-            Characters.NPC.EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
+            EventSystem.SpawnFruitAtPlayerPosition -= SpawnFruitAtPlayerBag;
+            EventSystem.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+            EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
         }
 
         private void Start()

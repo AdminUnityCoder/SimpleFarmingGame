@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using SFG.UI;
 using UnityEngine;
 
-namespace SFG.Save
+namespace SimpleFarmingGame.Game
 {
     public class SaveLoadManager : Singleton<SaveLoadManager>
     {
@@ -106,8 +105,6 @@ namespace SFG.Save
             {
                 savable.RestoreData(json.GameDataDict[savable.GUID]);
             }
-
-            Debug.Log("DATA" + index + "LOADED!");
         }
 
         private void ReadGameProgress()

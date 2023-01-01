@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SFG.MapSystem
+namespace SimpleFarmingGame.Game
 {
     /// <summary>
     /// 瓦片信息

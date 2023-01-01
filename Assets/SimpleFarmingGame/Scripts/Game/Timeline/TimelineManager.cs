@@ -1,9 +1,7 @@
-﻿using SFG.Game;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
-using EventSystem = SFG.TransitionSystem.EventSystem;
 
-namespace SFG.TimelineSystem
+namespace SimpleFarmingGame.Game
 {
     public class TimelineManager : Singleton<TimelineManager>
     {

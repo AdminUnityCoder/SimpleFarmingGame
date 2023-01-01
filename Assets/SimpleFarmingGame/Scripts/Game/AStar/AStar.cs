@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using SFG.MapSystem;
 using UnityEngine;
 
-namespace SFG.AStar
+namespace SimpleFarmingGame.Game
 {
     public class AStar : Singleton<AStar>
     {

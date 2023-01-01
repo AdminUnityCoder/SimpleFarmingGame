@@ -1,12 +1,11 @@
 ﻿using System;
 using DG.Tweening;
-using SFG.TimeSystem;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace SFG.LightSystem
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
+    public static partial class EventSystem
     {
         public static event Action<Season, LightShift, float> LightShiftChangeEvent;
 
@@ -35,8 +34,8 @@ namespace SFG.LightSystem
             if (timeDifference < LightModel.LightChangeDuration)
             {
                 Color colorOffset = (m_CurrentLightDetails.LightColor - m_CurrentLight.color)
-                                  / LightModel.LightChangeDuration
-                                  * timeDifference;
+                  / LightModel.LightChangeDuration
+                  * timeDifference;
                 m_CurrentLight.color += colorOffset;
 
                 DOTween.To

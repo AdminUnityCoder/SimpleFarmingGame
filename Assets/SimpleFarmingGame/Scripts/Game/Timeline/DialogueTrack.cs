@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Timeline;
 
-namespace SFG.TimelineSystem
+namespace SimpleFarmingGame.Game
 {
     [TrackClipType(typeof(DialogueClip))] public class DialogueTrack : TrackAsset { }
 }

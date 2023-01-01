@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace SFG.TransitionSystem
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
+    public static partial class EventSystem
     {
         public static event Action<string, Vector3> TransitionEvent;
 

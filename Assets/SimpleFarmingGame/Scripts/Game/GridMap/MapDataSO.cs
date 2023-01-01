@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.MapSystem
+namespace SimpleFarmingGame.Game
 {
     /// <summary>
     /// MapDataSO Contains "SceneName" and "TilePropertyList"
@@ -10,11 +10,9 @@ namespace SFG.MapSystem
     public class MapDataSO : ScriptableObject
     {
         public string SceneName;
-        [Header("地图信息")]
-        public int MapWidth;
+        [Header("地图信息")] public int MapWidth;
         public int MapHeight;
-        [Header("原点坐标(左下角原点坐标)")] 
-        public int OriginX;
+        [Header("原点坐标(左下角原点坐标)")] public int OriginX;
         public int OriginY;
         public List<TileProperty> TilePropertyList;
     }

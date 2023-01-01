@@ -1,8 +1,6 @@
-using System;
-using SFG.Game;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class ActionBarButton : MonoBehaviour
     {
@@ -17,12 +15,12 @@ namespace SFG.InventorySystem
 
         private void OnEnable()
         {
-            Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
+            EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
         }
 
         private void OnDisable()
         {
-            Game.EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+            EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
         }
 
         private void OnUpdateGameStateEvent(GameState gameState)

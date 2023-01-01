@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using SFG.InventorySystem;
-using SFG.MapSystem;
 
-namespace SFG.Save
+namespace SimpleFarmingGame.Game
 {
     [Serializable]
     public class GameSaveData

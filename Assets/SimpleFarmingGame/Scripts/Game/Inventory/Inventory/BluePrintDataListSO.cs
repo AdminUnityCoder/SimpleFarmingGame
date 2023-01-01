@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     [CreateAssetMenu(fileName = "BluePrintDataListSO", menuName = "ScriptableObject/BluePrint")]
     public class BluePrintDataListSO : ScriptableObject

@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using SFG.Characters.NPC;
-using SFG.TimeSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-namespace SFG.AStar
+namespace SimpleFarmingGame.Game
 {
     public class AStarTest : MonoBehaviour
     {
@@ -37,8 +35,18 @@ namespace SFG.AStar
             if (MoveNPC)
             {
                 MoveNPC = false;
-                ScheduleDetails scheduleDetails = new ScheduleDetails(0, 0, 0, 0, Season.春天, TargetScene, TargetPosition
-                  , StopClip, true);
+                ScheduleDetails scheduleDetails = new ScheduleDetails
+                (
+                    0
+                  , 0
+                  , 0
+                  , 0
+                  , Season.春天
+                  , TargetScene
+                  , TargetPosition
+                  , StopClip
+                  , true
+                );
                 NPC.BuildPath(scheduleDetails);
             }
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     [RequireComponent(typeof(SlotUI))]
     public class ShowItemTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler

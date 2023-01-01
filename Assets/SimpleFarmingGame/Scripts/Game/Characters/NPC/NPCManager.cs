@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     public class NPCManager : Singleton<NPCManager>
     {
@@ -21,12 +21,12 @@ namespace SFG.Characters.NPC
 
         private void OnEnable()
         {
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
         }
 
         private void OnDisable()
         {
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
         }
 
         private void OnStartNewGameEvent(int obj)

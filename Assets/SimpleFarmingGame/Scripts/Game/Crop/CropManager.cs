@@ -1,21 +1,8 @@
-using System;
 using System.Linq;
-using SFG.MapSystem;
-using SFG.TimeSystem;
 using UnityEngine;
 
-namespace SFG.CropSystem
+namespace SimpleFarmingGame.Game
 {
-    public static partial class EventSystem
-    {
-        public static event Action<int, TileDetails> UpdateSceneCropEvent;
-
-        public static void CallUpdateSceneCropEvent(int cropSeedID, TileDetails tileDetails)
-        {
-            UpdateSceneCropEvent?.Invoke(cropSeedID, tileDetails);
-        }
-    }
-
     public class CropManager : Singleton<CropManager>
     {
         public CropDataListSO CropData;
@@ -26,15 +13,15 @@ namespace SFG.CropSystem
         private void OnEnable()
         {
             EventSystem.UpdateSceneCropEvent += OnUpdateSceneCropEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            TimeSystem.EventSystem.GameDayChangeEvent += OnGameDayChangeEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.GameDayChangeEvent += OnGameDayChangeEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.UpdateSceneCropEvent -= OnUpdateSceneCropEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            TimeSystem.EventSystem.GameDayChangeEvent -= OnGameDayChangeEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.GameDayChangeEvent -= OnGameDayChangeEvent;
         }
 
         private void OnAfterSceneLoadedEvent()

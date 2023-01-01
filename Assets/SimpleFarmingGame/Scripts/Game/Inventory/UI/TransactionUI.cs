@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class TransactionUI : MonoBehaviour
     {
@@ -36,7 +37,7 @@ namespace SFG.InventorySystem
 
         private void TransactionItem()
         {
-            int amount = System.Convert.ToInt32(TransactionAmount.text);
+            int amount = Convert.ToInt32(TransactionAmount.text);
             InventoryManager.Instance.TransactionItem(m_ItemDetails, amount, m_IsSell);
             CancelTransaction();
         }

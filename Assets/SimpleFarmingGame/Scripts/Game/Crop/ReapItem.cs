@@ -1,7 +1,6 @@
-﻿using SimpleFarmingGame.Game;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SFG.CropSystem
+namespace SimpleFarmingGame.Game
 {
     public class ReapItem : MonoBehaviour
     {
@@ -37,13 +36,17 @@ namespace SFG.CropSystem
                         m_CropPosition = transform.position;
                         int directionX = m_CropPosition.x > Player.Instance.Position.x ? 1 : -1;
                         // 物品生成的位置
-                        Vector3 spawnPosition = new Vector3(
+                        Vector3 spawnPosition = new Vector3
+                        (
                             m_CropPosition.x + Random.Range(directionX, m_CropDetails.SpawnRadius.x * directionX)
                           , m_CropPosition.y + Random.Range(-m_CropDetails.SpawnRadius.y, m_CropDetails.SpawnRadius.y)
-                          , 0);
-                        InventorySystem.EventSystem.CallInstantiateItemInScene(
+                          , 0
+                        );
+                        EventSystem.CallInstantiateItemInScene
+                        (
                             m_CropDetails.HarvestFruitID[i]
-                          , spawnPosition);
+                          , spawnPosition
+                        );
                     }
                 }
             }

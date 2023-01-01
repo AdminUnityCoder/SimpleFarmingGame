@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.TimeSystem
+namespace SimpleFarmingGame.Game
 {
     public static partial class EventSystem
     {

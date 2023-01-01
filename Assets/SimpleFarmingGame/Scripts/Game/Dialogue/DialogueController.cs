@@ -1,23 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using SFG.Characters.NPC;
-using SFG.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace SFG.DialogueSystem
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
-    {
-        public static event Action<Dialogue> ShowDialogueBoxEvent;
-
-        public static void CallShowDialogueBoxEvent(Dialogue dialogue)
-        {
-            ShowDialogueBoxEvent?.Invoke(dialogue);
-        }
-    }
-
     [RequireComponent(typeof(NPC))]
     [RequireComponent(typeof(BoxCollider2D))]
     public class DialogueController : MonoBehaviour
@@ -80,14 +67,14 @@ namespace SFG.DialogueSystem
             if (m_DialogueStack.TryPop(out Dialogue result))
             {
                 EventSystem.CallShowDialogueBoxEvent(result);
-                Game.EventSystem.CallUpdateGameStateEvent(GameState.Pause);
+                EventSystem.CallUpdateGameStateEvent(GameState.Pause);
                 yield return new WaitUntil(() => result.IsFinished == true);
                 m_IsTalking = false;
             }
             else
             {
                 // FIXME: 必须聊天了才能使用数字键进行快捷操作，需要修改为游戏一开始是Gameplay
-                Game.EventSystem.CallUpdateGameStateEvent(GameState.Gameplay);
+                EventSystem.CallUpdateGameStateEvent(GameState.Gameplay);
                 EventSystem.CallShowDialogueBoxEvent(null);
                 CreateDialogueStack();
                 m_IsTalking = false;

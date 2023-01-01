@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.CropSystem
+namespace SimpleFarmingGame.Game
 {
     [CreateAssetMenu(menuName = "ScriptableObject/Crop/CropData", fileName = "CropDataSO")]
     public class CropDataListSO : ScriptableObject

@@ -1,31 +1,8 @@
-using System;
 using System.Collections;
-using SFG.AudioSystem;
-using SimpleFarmingGame.Game;
-using SFG.InventorySystem;
-using SFG.MapSystem;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace SFG.CropSystem
+namespace SimpleFarmingGame.Game
 {
-    public static partial class EventSystem
-    {
-        public static event Action<int> SpawnFruitAtPlayerPosition;
-
-        public static void CallSpawnFruitAtPlayerPosition(int itemID)
-        {
-            SpawnFruitAtPlayerPosition?.Invoke(itemID);
-        }
-
-        public static event Action<ParticleEffectType, Vector3> ParticleEffectEvent;
-
-        public static void CallParticleEffectEvent(ParticleEffectType type, Vector3 position)
-        {
-            ParticleEffectEvent?.Invoke(type, position);
-        }
-    }
-
     // 执行收割逻辑
     public class Crop : MonoBehaviour
     {
@@ -64,7 +41,7 @@ namespace SFG.CropSystem
                     m_Animator.SetTrigger
                         (Player.Instance.Position.x < transform.position.x ? FallingRight : FallingLeft);
 
-                    AudioSystem.EventSystem.CallPlaySoundEvent(SoundName.TreeFalling);
+                    EventSystem.CallPlaySoundEvent(SoundName.TreeFalling);
                     StartCoroutine(HarvestAfterAnimationCoroutine());
                 }
             }
@@ -94,7 +71,7 @@ namespace SFG.CropSystem
                 // 播放声音
                 if (CropDetails.SoundEffect != SoundName.None)
                 {
-                    AudioSystem.EventSystem.CallPlaySoundEvent(CropDetails.SoundEffect);
+                    EventSystem.CallPlaySoundEvent(CropDetails.SoundEffect);
                 }
             }
         }
@@ -131,7 +108,7 @@ namespace SFG.CropSystem
                           , m_CropPosition.y + Random.Range(-CropDetails.SpawnRadius.y, CropDetails.SpawnRadius.y)
                           , 0
                         );
-                        InventorySystem.EventSystem.CallInstantiateItemInScene
+                        EventSystem.CallInstantiateItemInScene
                         (
                             CropDetails.HarvestFruitID[i]
                           , spawnPosition
@@ -156,7 +133,7 @@ namespace SFG.CropSystem
                 // 日期回退
                 TileDetails.HaveGrownDays = CropDetails.TotalGrowthDays - CropDetails.DaysToRegrow;
                 // 刷新种子
-                MapSystem.EventSystem.CallRefreshCurrentSceneMap();
+                EventSystem.CallRefreshCurrentSceneMap();
             }
             else // 不可重复生长
             {
@@ -194,7 +171,7 @@ namespace SFG.CropSystem
             TileDetails.HasHarvestTimes = -1;
             TileDetails.HaveGrownDays = 0;
 
-            MapSystem.EventSystem.CallRefreshCurrentSceneMap();
+            EventSystem.CallRefreshCurrentSceneMap();
         }
     }
 }

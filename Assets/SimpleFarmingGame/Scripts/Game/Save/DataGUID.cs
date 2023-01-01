@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SFG.Save
+namespace SimpleFarmingGame.Game
 {
     [ExecuteAlways]
     public class DataGUID : MonoBehaviour

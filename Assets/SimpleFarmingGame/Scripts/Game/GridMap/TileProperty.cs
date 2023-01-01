@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SFG.MapSystem
+namespace SimpleFarmingGame.Game
 {
     /// <summary>
     /// 瓦片（格子）属性，包含瓦片类型（TileType）、瓦片坐标（TileCoordinate）

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     /// <summary>
     /// OldName:SceneRoute<br/>

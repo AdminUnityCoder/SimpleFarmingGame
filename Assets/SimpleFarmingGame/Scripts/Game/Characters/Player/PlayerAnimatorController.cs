@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using SFG.InventorySystem;
 using UnityEngine;
 
 namespace SimpleFarmingGame.Game
@@ -85,17 +84,17 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.ItemSelectedEvent += SwitchPlayerActionAndSetupHoldItemSprite; // InventorySystem
-            SFG.TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += ResetPlayerState;
-            SFG.CursorSystem.EventSystem.MouseClickedEvent += OnMouseClickedEvent;
-            SFG.CropSystem.EventSystem.SpawnFruitAtPlayerPosition += ShowHarvestFruitSprite;
+            EventSystem.BeforeSceneUnloadedEvent += ResetPlayerState;
+            EventSystem.MouseClickedEvent += OnMouseClickedEvent;
+            EventSystem.SpawnFruitAtPlayerPosition += ShowHarvestFruitSprite;
         }
 
         private void OnDisable()
         {
             EventSystem.ItemSelectedEvent -= SwitchPlayerActionAndSetupHoldItemSprite; // InventorySystem
-            SFG.TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= ResetPlayerState;
-            SFG.CursorSystem.EventSystem.MouseClickedEvent -= OnMouseClickedEvent;
-            SFG.CropSystem.EventSystem.SpawnFruitAtPlayerPosition -= ShowHarvestFruitSprite;
+            EventSystem.BeforeSceneUnloadedEvent -= ResetPlayerState;
+            EventSystem.MouseClickedEvent -= OnMouseClickedEvent;
+            EventSystem.SpawnFruitAtPlayerPosition -= ShowHarvestFruitSprite;
         }
 
         /// <summary>
@@ -186,7 +185,7 @@ namespace SimpleFarmingGame.Game
 
             if (itemDetails.ItemType is ItemType.Seed or ItemType.Commodity or ItemType.Furniture)
             {
-                SFG.CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
+                EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
             }
             else // if use tool
             {
@@ -240,7 +239,7 @@ namespace SimpleFarmingGame.Game
             }
 
             yield return m_WaitForPlayPartialAnimation; // 先播放部分动画
-            SFG.CursorSystem.EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
+            EventSystem.CallExecuteActionAfterAnimation(mouseWorldPosition, itemDetails);
             yield return m_WaitForPlayRemainingAnimation; // 再将剩余动画部分播放完
             m_IsUsingTool = false;
             Player.Instance.EnableInput();

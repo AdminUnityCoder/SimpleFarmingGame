@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SFG.TimeSystem;
 using UnityEngine;
 
-namespace SFG.LightSystem
+namespace SimpleFarmingGame.Game
 {
     [CreateAssetMenu(fileName = "LightDataList_SO", menuName = "ScriptableObject/LightData")]
     public class LightData : ScriptableObject

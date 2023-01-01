@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     [CreateAssetMenu(fileName = "RouteMapListSO", menuName = "ScriptableObject/RouteMapDataList")]
     public class RouteMapDataListSO : ScriptableObject

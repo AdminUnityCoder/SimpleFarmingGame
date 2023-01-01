@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using SFG.AudioSystem;
 using UnityEngine;
 using UnityEngine.Pool;
-using EventSystem = SFG.CropSystem.EventSystem;
 
-namespace SFG.PoolManager
+namespace SimpleFarmingGame.Game
 {
     public class PoolManager : MonoBehaviour
     {
@@ -18,13 +16,13 @@ namespace SFG.PoolManager
         private void OnEnable()
         {
             EventSystem.ParticleEffectEvent += OnParticleEffectEvent;
-            AudioSystem.EventSystem.InitSoundEffectEvent += InitSoundEffect;
+            EventSystem.InitSoundEffectEvent += InitSoundEffect;
         }
 
         private void OnDisable()
         {
             EventSystem.ParticleEffectEvent -= OnParticleEffectEvent;
-            AudioSystem.EventSystem.InitSoundEffectEvent -= InitSoundEffect;
+            EventSystem.InitSoundEffectEvent -= InitSoundEffect;
         }
 
         private void Start()
@@ -102,7 +100,6 @@ namespace SFG.PoolManager
             for (int i = 0; i < 20; ++i) // 预生成
             {
                 GameObject soundObj = Instantiate(PoolPrefab[4], parent);
-                Debug.Log("Instantiate Sound");
                 soundObj.SetActive(false);
                 m_SoundQueue.Enqueue(soundObj);
             }

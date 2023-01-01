@@ -1,27 +1,7 @@
-﻿using System;
-using SFG.Game;
-using SFG.InventorySystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
-    {
-        public static event Action<SlotType, InventoryBagSO> BaseBagOpenEvent;
-
-        public static void CallBaseBagOpenEvent(SlotType slotType, InventoryBagSO bagData)
-        {
-            BaseBagOpenEvent?.Invoke(slotType, bagData);
-        }
-
-        public static event Action<SlotType, InventoryBagSO> BaseBagCloseEvent;
-
-        public static void CallBaseBagCloseEvent(SlotType slotType, InventoryBagSO bagData)
-        {
-            BaseBagCloseEvent?.Invoke(slotType, bagData);
-        }
-    }
-
     public class NPCFunction : MonoBehaviour
     {
         public InventoryBagSO ShopData;
@@ -40,14 +20,14 @@ namespace SFG.Characters.NPC
         {
             m_IsOpen = true;
             EventSystem.CallBaseBagOpenEvent(SlotType.Shop, ShopData);
-            Game.EventSystem.CallUpdateGameStateEvent(GameState.Pause);
+            EventSystem.CallUpdateGameStateEvent(GameState.Pause);
         }
 
         public void CloseShop()
         {
             m_IsOpen = false;
             EventSystem.CallBaseBagCloseEvent(SlotType.Shop, ShopData);
-            Game.EventSystem.CallUpdateGameStateEvent(GameState.Gameplay);
+            EventSystem.CallUpdateGameStateEvent(GameState.Gameplay);
         }
     }
 }

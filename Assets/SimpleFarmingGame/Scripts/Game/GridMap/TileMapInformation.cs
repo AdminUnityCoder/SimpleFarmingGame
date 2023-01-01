@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace SFG.MapSystem
+namespace SimpleFarmingGame.Game
 {
     // 需要在编辑器模式下运行，即 Application.IsPlaying(this) == false
     [ExecuteInEditMode]

@@ -1,4 +1,7 @@
-public enum ParticleEffectType
+namespace SimpleFarmingGame.Game
 {
-    None, FallingLeaves01, FallingLeaves02, Rock, Grass
+    public enum ParticleEffectType
+    {
+        None, FallingLeaves01, FallingLeaves02, Rock, Grass
+    }
 }

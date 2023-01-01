@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SFG.AudioSystem
+namespace SimpleFarmingGame.Game
 {
     [CreateAssetMenu(fileName = "SceneSoundListSO", menuName = "ScriptableObject/Audio/SceneSoundList")]
     public class SceneSoundListSO : ScriptableObject

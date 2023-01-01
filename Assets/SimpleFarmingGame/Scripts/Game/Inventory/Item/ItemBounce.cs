@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class ItemBounce : MonoBehaviour
     {

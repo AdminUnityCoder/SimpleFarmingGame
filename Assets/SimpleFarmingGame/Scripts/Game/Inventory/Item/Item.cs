@@ -1,7 +1,7 @@
-using SFG.CropSystem;
+using SimpleFarmingGame.Game;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class Item : MonoBehaviour
     {

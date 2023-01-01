@@ -1,9 +1,5 @@
 ﻿using System.Collections.Generic;
-using SFG.Game;
-using SFG.InventorySystem;
-using SFG.Save;
 using UnityEngine;
-using EventSystem = SFG.TransitionSystem.EventSystem;
 
 namespace SimpleFarmingGame.Game
 {
@@ -53,12 +49,12 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.BeforeSceneUnloadedEvent += DisableInput;                // TransitionManager
-            EventSystem.AfterSceneLoadedEvent += EnableInput;                    // TransitionManager
-            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;            // TransitionManager
-            SFG.Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent; // Game
-            SFG.UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;         // UI
-            SFG.UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.BeforeSceneUnloadedEvent += DisableInput;       // TransitionManager
+            EventSystem.AfterSceneLoadedEvent += EnableInput;           // TransitionManager
+            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;   // TransitionManager
+            EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent; // Game
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;       // UI
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
@@ -66,9 +62,9 @@ namespace SimpleFarmingGame.Game
             EventSystem.BeforeSceneUnloadedEvent -= DisableInput;     // TransitionManager
             EventSystem.AfterSceneLoadedEvent -= EnableInput;         // TransitionManager
             EventSystem.MoveToPositionEvent -= OnMoveToPositionEvent; // TransitionManager
-            SFG.Game.EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
-            SFG.UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
-            SFG.UI.EventSystem.EndGameEvent -= OnEndGameEvent;
+            EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
+            EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 
         bool IPlayer.IsMoving => m_IsMoving;

@@ -1,9 +1,8 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class ItemTooltip : MonoBehaviour
     {

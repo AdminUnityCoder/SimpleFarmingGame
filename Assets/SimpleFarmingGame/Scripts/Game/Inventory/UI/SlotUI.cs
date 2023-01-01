@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public enum SlotType { Bag, Box, Shop }
 

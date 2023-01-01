@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace SFG.Game
+namespace SimpleFarmingGame.Game
 {
     public enum GameState { Gameplay, Pause }
 
-    public static class EventSystem
+    public static partial class EventSystem
     {
         public static event Action<GameState> UpdateGameStateEvent;
 

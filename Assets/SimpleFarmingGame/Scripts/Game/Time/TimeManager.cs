@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using SFG.Game;
-using SFG.LightSystem;
-using SFG.Save;
 using UnityEngine;
 
-namespace SFG.TimeSystem
+namespace SimpleFarmingGame.Game
 {
     public static partial class EventSystem
     {
@@ -41,20 +38,20 @@ namespace SFG.TimeSystem
 
         private void OnEnable()
         {
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            Game.EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            Game.EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
-            UI.EventSystem.EndGameEvent -= OnEndGameEvent;
+            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 
         private void Start()
@@ -104,10 +101,9 @@ namespace SFG.TimeSystem
         private void OnAfterSceneLoadedEvent()
         {
             m_GameClockPause = false;
-            Debug.Log(m_GameClockPause);
             EventSystem.CallGameMinuteChangeEvent(m_GameMinute, m_GameHour, m_GameDay, m_GameSeason);
             EventSystem.CallGameDateChangeEvent(m_GameHour, m_GameDay, m_GameMonth, m_GameYear, m_GameSeason);
-            LightSystem.EventSystem.CallLightShiftChangeEvent(m_GameSeason, GetCurrentLightShift(), m_TimeDifference);
+            EventSystem.CallLightShiftChangeEvent(m_GameSeason, GetCurrentLightShift(), m_TimeDifference);
         }
 
         private void OnUpdateGameStateEvent(GameState gameState)
@@ -192,7 +188,7 @@ namespace SFG.TimeSystem
 
                 EventSystem.CallGameMinuteChangeEvent(m_GameMinute, m_GameHour, m_GameDay, m_GameSeason);
                 // 切换灯光
-                LightSystem.EventSystem.CallLightShiftChangeEvent
+                EventSystem.CallLightShiftChangeEvent
                     (m_GameSeason, GetCurrentLightShift(), m_TimeDifference);
             }
 

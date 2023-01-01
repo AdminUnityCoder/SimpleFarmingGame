@@ -1,5 +1,4 @@
-﻿using SFG.AudioSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SimpleFarmingGame.Game
 {

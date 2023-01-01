@@ -1,11 +1,8 @@
 using System;
-using SFG.DialogueSystem;
-using SFG.Game;
 using UnityEngine;
 using UnityEngine.Playables;
-using EventSystem = SFG.DialogueSystem.EventSystem;
 
-namespace SFG.TimelineSystem
+namespace SimpleFarmingGame.Game
 {
     [Serializable]
     public class DialogueBehaviour : PlayableBehaviour
@@ -50,12 +47,12 @@ namespace SFG.TimelineSystem
 
         public override void OnGraphStart(Playable playable)
         {
-            Game.EventSystem.CallUpdateGameStateEvent(GameState.Pause);
+            EventSystem.CallUpdateGameStateEvent(GameState.Pause);
         }
 
         public override void OnGraphStop(Playable playable)
         {
-            Game.EventSystem.CallUpdateGameStateEvent(GameState.Gameplay);
+            EventSystem.CallUpdateGameStateEvent(GameState.Gameplay);
         }
     }
 }

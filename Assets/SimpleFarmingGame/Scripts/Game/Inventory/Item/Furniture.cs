@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     [Serializable]
     public class SceneFurniture

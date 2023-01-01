@@ -1,9 +1,8 @@
 using System.Collections;
-using SFG.Save;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SFG.TransitionSystem
+namespace SimpleFarmingGame.Game
 {
     public class TransitionManager : Singleton<TransitionManager>, ISavable
     {
@@ -15,15 +14,15 @@ namespace SFG.TransitionSystem
         private void OnEnable()
         {
             EventSystem.TransitionEvent += OnTransitionEvent;
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.TransitionEvent -= OnTransitionEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
-            UI.EventSystem.EndGameEvent -= OnEndGameEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 
         protected override void Awake()

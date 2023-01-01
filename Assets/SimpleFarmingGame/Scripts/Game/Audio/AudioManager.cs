@@ -1,29 +1,10 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
-namespace SFG.AudioSystem
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
-    {
-        public static event Action<SoundDetails> InitSoundEffectEvent;
-
-        public static void CallInitSoundEvent(SoundDetails soundDetails)
-        {
-            InitSoundEffectEvent?.Invoke(soundDetails);
-        }
-
-        public static event Action<SoundName> PlaySoundEvent;
-
-        public static void CallPlaySoundEvent(SoundName soundName)
-        {
-            PlaySoundEvent?.Invoke(soundName);
-        }
-    }
-
     public class AudioManager : Singleton<AudioManager>
     {
         [Header("SoundDetails")] public SoundDetailsListSO SoundDetailsData;
@@ -44,16 +25,16 @@ namespace SFG.AudioSystem
 
         private void OnEnable()
         {
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.PlaySoundEvent += OnPlaySoundEvent;
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.PlaySoundEvent -= OnPlaySoundEvent;
-            UI.EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnAfterSceneLoadedEvent()

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SFG.Characters.NPC
+namespace SimpleFarmingGame.Game
 {
     [Serializable]
     public class NPCPosition

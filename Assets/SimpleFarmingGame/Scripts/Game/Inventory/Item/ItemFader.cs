@@ -1,9 +1,7 @@
 using DG.Tweening;
-using SFG.Interface;
-using SFG.Model;
 using UnityEngine;
 
-namespace SFG.Model
+namespace SimpleFarmingGame.Game
 {
     internal static class FadeModel
     {
@@ -11,34 +9,31 @@ namespace SFG.Model
         public static Color TransparentColor = new(1f, 1f, 1f, 0.45f);
         public const float TweenDuration = 0.35f;
     }
-}
 
-namespace SFG.Interface
-{
     public interface IFadable
     {
         void FadeIn();
         void FadeOut();
     }
-}
 
-[RequireComponent(typeof(SpriteRenderer))]
-public class ItemFader : MonoBehaviour, IFadable
-{
-    private SpriteRenderer m_SpriteRenderer;
-
-    private void Awake()
+    [RequireComponent(typeof(SpriteRenderer))]
+    public class ItemFader : MonoBehaviour, IFadable
     {
-        m_SpriteRenderer = GetComponent<SpriteRenderer>();
-    }
+        private SpriteRenderer m_SpriteRenderer;
 
-    public void FadeIn()
-    {
-        m_SpriteRenderer.DOColor(FadeModel.OpaqueColor, FadeModel.TweenDuration);
-    }
+        private void Awake()
+        {
+            m_SpriteRenderer = GetComponent<SpriteRenderer>();
+        }
 
-    public void FadeOut()
-    {
-        m_SpriteRenderer.DOColor(FadeModel.TransparentColor, FadeModel.TweenDuration);
+        public void FadeIn()
+        {
+            m_SpriteRenderer.DOColor(FadeModel.OpaqueColor, FadeModel.TweenDuration);
+        }
+
+        public void FadeOut()
+        {
+            m_SpriteRenderer.DOColor(FadeModel.TransparentColor, FadeModel.TweenDuration);
+        }
     }
 }

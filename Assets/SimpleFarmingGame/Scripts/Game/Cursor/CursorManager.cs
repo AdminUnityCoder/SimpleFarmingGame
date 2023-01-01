@@ -1,30 +1,8 @@
-using System;
-using SimpleFarmingGame.Game;
-using SFG.CropSystem;
-using SFG.InventorySystem;
-using SFG.MapSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.CursorSystem
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
-    {
-        public static event Action<Vector3, ItemDetails> MouseClickedEvent;
-
-        public static void CallMouseClickedEvent(Vector3 mousePosition, ItemDetails itemDetails)
-        {
-            MouseClickedEvent?.Invoke(mousePosition, itemDetails);
-        }
-
-        public static event Action<Vector3, ItemDetails> ExecuteActionAfterAnimation;
-
-        public static void CallExecuteActionAfterAnimation(Vector3 mousePosition, ItemDetails itemDetails)
-        {
-            ExecuteActionAfterAnimation?.Invoke(mousePosition, itemDetails);
-        }
-    }
-
     public class CursorManager : MonoBehaviour
     {
         [Header("Cursor")] [SerializeField] private Sprite Normal;
@@ -50,16 +28,16 @@ namespace SFG.CursorSystem
 
         private void OnEnable()
         {
-            InventorySystem.EventSystem.ItemSelectedEvent += OnItemSelectedEvent;
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.ItemSelectedEvent += OnItemSelectedEvent;
+            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
-            InventorySystem.EventSystem.ItemSelectedEvent -= OnItemSelectedEvent;
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.ItemSelectedEvent -= OnItemSelectedEvent;
+            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void Start()
@@ -357,7 +335,7 @@ namespace SFG.CursorSystem
         private static bool InteractWithUI()
         {
             return UnityEngine.EventSystems.EventSystem.current != null
-                && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
+             && UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject();
             // IsPointerOverGameObject() 判断鼠标是否点击在UI上
         }
     }

@@ -1,29 +1,10 @@
 using System;
 using System.Collections.Generic;
-using SimpleFarmingGame.Game;
-using SFG.Save;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
-    public static partial class EventSystem
-    {
-        public static event Action<int, Vector3> InstantiateItemInScene;
-
-        public static void CallInstantiateItemInScene(int itemID, Vector3 position)
-        {
-            InstantiateItemInScene?.Invoke(itemID, position);
-        }
-
-        public static event Action<int, Vector3, ItemType> DropItemEvent;
-
-        public static void CallDropItemEvent(int itemID, Vector3 position, ItemType itemType)
-        {
-            DropItemEvent?.Invoke(itemID, position, itemType);
-        }
-    }
-
     [Serializable]
     public class SerializableVector3
     {
@@ -67,22 +48,22 @@ namespace SFG.InventorySystem
         {
             EventSystem.InstantiateItemInScene += OnInstantiateItemInScene;
             EventSystem.DropItemEvent += OnDropItemEvent;
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            MapSystem.EventSystem.BuildFurnitureEvent += OnBuildFurnitureEvent;
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent; // UI
+            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.BuildFurnitureEvent += OnBuildFurnitureEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent; // UI
         }
 
         private void OnDisable()
         {
             EventSystem.InstantiateItemInScene -= OnInstantiateItemInScene;
             EventSystem.DropItemEvent -= OnDropItemEvent;
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            MapSystem.EventSystem.BuildFurnitureEvent -= OnBuildFurnitureEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
+            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.BuildFurnitureEvent -= OnBuildFurnitureEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
         }
-        
+
         private void Start()
         {
             ISavable savable = this;

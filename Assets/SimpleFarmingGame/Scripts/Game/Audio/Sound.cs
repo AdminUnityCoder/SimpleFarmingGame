@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SFG.AudioSystem
+namespace SimpleFarmingGame.Game
 {
     [RequireComponent(typeof(AudioSource))]
     public class Sound : MonoBehaviour

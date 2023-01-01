@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.InventorySystem
+namespace SimpleFarmingGame.Game
 {
     public class InventoryUI : MonoBehaviour
     {
@@ -41,18 +41,18 @@ namespace SFG.InventorySystem
         private void OnEnable()
         {
             EventSystem.UpdateInventoryUI += OnUpdateInventoryUI;
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            Characters.NPC.EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
-            Characters.NPC.EventSystem.BaseBagCloseEvent += OnBaseBagCloseEvent;
+            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventSystem.BaseBagCloseEvent += OnBaseBagCloseEvent;
             EventSystem.ShowTransactionUIEvent += OnShowTransactionUIEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.UpdateInventoryUI -= OnUpdateInventoryUI;
-            TransitionSystem.EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            Characters.NPC.EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
-            Characters.NPC.EventSystem.BaseBagCloseEvent -= OnBaseBagCloseEvent;
+            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
+            EventSystem.BaseBagCloseEvent -= OnBaseBagCloseEvent;
             EventSystem.ShowTransactionUIEvent -= OnShowTransactionUIEvent;
         }
 
@@ -85,7 +85,7 @@ namespace SFG.InventorySystem
                     for (int i = 0; i < PlayerSlots.Length; ++i)
                     {
                         if (itemList[i].ItemAmount > 0)
-                        { 
+                        {
                             // itemList => PlayerBagList
                             ItemDetails itemDetails = InventoryManager.Instance.GetItemDetails(itemList[i].ItemID);
                             PlayerSlots[i].SetSlot(itemDetails, itemList[i].ItemAmount);

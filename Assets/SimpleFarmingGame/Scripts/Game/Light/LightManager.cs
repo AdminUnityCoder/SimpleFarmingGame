@@ -1,8 +1,7 @@
 using System;
-using SFG.TimeSystem;
 using UnityEngine;
 
-namespace SFG.LightSystem
+namespace SimpleFarmingGame.Game
 {
     public static class LightModel
     {
@@ -20,16 +19,16 @@ namespace SFG.LightSystem
 
         private void OnEnable()
         {
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.LightShiftChangeEvent += OnLightShiftChangeEvent;
-            UI.EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
         }
 
         private void OnDisable()
         {
-            TransitionSystem.EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.LightShiftChangeEvent -= OnLightShiftChangeEvent;
-            UI.EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
         }
 
         private void OnAfterSceneLoadedEvent()

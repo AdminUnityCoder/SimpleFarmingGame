@@ -1,7 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 
-namespace SFG.TransitionSystem
+namespace SimpleFarmingGame.Game
 {
     public class SwitchBounds : MonoBehaviour
     {

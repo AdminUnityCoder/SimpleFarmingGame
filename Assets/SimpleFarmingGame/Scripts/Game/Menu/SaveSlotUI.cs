@@ -1,11 +1,10 @@
 ﻿using System;
-using SFG.Save;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SFG.UI
+namespace SimpleFarmingGame.Game
 {
-    public static class EventSystem
+    public static partial class EventSystem
     {
         public static event Action<int> StartNewGameEvent;
 

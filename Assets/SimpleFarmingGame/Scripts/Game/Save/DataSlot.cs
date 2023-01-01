@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using SFG.TimeSystem;
-using SFG.TransitionSystem;
 
-namespace SFG.Save
+namespace SimpleFarmingGame.Game
 {
     public class DataSlot
     {

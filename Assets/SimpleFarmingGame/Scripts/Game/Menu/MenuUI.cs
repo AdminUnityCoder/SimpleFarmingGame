@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SFG.UI
+namespace SimpleFarmingGame.Game
 {
     public class MenuUI : MonoBehaviour
     {
