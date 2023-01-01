@@ -5,6 +5,9 @@ namespace SimpleFarmingGame.Game
     public sealed class Player : MonoBehaviour
     {
         public const float SPEED = 5f;
+        public const float PlayPartialAnimationTime = 0.45f;   // 播放一部分动画时间
+        public const float PlayRemainingAnimationTime = 0.25f; // 播放剩余动画时间
+        public const float ShowHarvestFruitSpriteTime = 1f;    // 显示收割果实图片时间
         private static Player s_Instance;
         private IPlayer m_Player;
         private IPlayerInput m_PlayerInput;

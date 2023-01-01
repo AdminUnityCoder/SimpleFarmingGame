@@ -34,29 +34,6 @@ namespace SFG.InventorySystem
         public bool CanCarried;
         public int ItemPrice;
         [Range(0, 1)] public float SellPercentage;
-
-        /// <summary>
-        /// 根据传入的物品详情的物品类型匹配玩家动作
-        /// </summary>
-        /// <param name="itemDetails">物品详情</param>
-        /// <returns>返回玩家动作</returns>
-        public PlayerActionEnum MatchPlayerAction(ItemDetails itemDetails)
-        {
-            PlayerActionEnum retAction = itemDetails.ItemType switch
-            {
-                ItemType.Seed => PlayerActionEnum.Carry
-              , ItemType.Commodity => PlayerActionEnum.Carry
-              , ItemType.HoeTool => PlayerActionEnum.Hoe
-              , ItemType.WaterTool => PlayerActionEnum.Water
-              , ItemType.CollectTool => PlayerActionEnum.Collect
-              , ItemType.AxeTool => PlayerActionEnum.Chop
-              , ItemType.PickAxeTool => PlayerActionEnum.Break
-              , ItemType.SickleTool => PlayerActionEnum.Reap
-              , ItemType.Furniture => PlayerActionEnum.None
-              , _ => PlayerActionEnum.None
-            };
-            return retAction;
-        }
     }
 
     [CreateAssetMenu(menuName = "ScriptableObject/Inventory/ItemData", fileName = "ItemDataListSO")]

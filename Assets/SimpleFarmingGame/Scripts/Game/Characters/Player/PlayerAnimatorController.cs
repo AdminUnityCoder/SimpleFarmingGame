@@ -6,29 +6,31 @@ using UnityEngine;
 
 namespace SimpleFarmingGame.Game
 {
-    public enum PlayerActionEnum { None, Carry, Hoe, Break, Water, Collect, Chop, Reap }
-
-    public enum BodyPartNamesEnum { Body, Hair, Arm, Tool }
-
-    [Serializable]
-    public class AnimatorType
-    {
-        /// <summary>
-        /// 玩家动作
-        /// </summary>
-        public PlayerActionEnum PlayerActionEnum;
-        /// <summary>
-        /// 身体部位名字
-        /// </summary>
-        public BodyPartNamesEnum BodyPartNamesEnum;
-        /// <summary>
-        /// Animator Override Controller
-        /// </summary>
-        public AnimatorOverrideController AnimatorOverrideController;
-    }
-
     public sealed class PlayerAnimatorController : MonoBehaviour
     {
+        private enum PlayerActionEnum { None, Carry, Hoe, Break, Water, Collect, Chop, Reap }
+
+        private enum BodyPartNamesEnum { Body, Hair, Arm, Tool }
+
+        [Serializable]
+        private class AnimatorType
+        {
+            /// <summary>
+            /// 玩家动作
+            /// </summary>
+            public PlayerActionEnum PlayerActionEnum;
+
+            /// <summary>
+            /// 身体部位名字
+            /// </summary>
+            public BodyPartNamesEnum BodyPartNamesEnum;
+
+            /// <summary>
+            /// Animator Override Controller
+            /// </summary>
+            public AnimatorOverrideController AnimatorOverrideController;
+        }
+
         [SerializeField] private List<AnimatorType> AnimatorTypes;
 
         private Dictionary<string, Animator> m_AnimatorComponentDict = new();
@@ -38,9 +40,6 @@ namespace SimpleFarmingGame.Game
         private bool m_IsUsingTool;
         private float m_MouseX;
         private float m_MouseY;
-        private const float PlayPartialAnimationTime = 0.45f;   // 播放一部分动画时间
-        private const float PlayRemainingAnimationTime = 0.25f;    // 播放剩余动画时间
-        private const float ShowHarvestFruitSpriteTime = 1f; // 显示收割果实图片时间
         private WaitForSeconds m_WaitForPlayPartialAnimation;
         private WaitForSeconds m_WaitForPlayRemainingAnimation;
         private WaitForSeconds m_WaitForShowHarvestFruitSprite;
@@ -64,9 +63,9 @@ namespace SimpleFarmingGame.Game
 
         private void Start()
         {
-            m_WaitForPlayPartialAnimation = new WaitForSeconds(PlayPartialAnimationTime);
-            m_WaitForPlayRemainingAnimation = new WaitForSeconds(PlayRemainingAnimationTime);
-            m_WaitForShowHarvestFruitSprite = new WaitForSeconds(ShowHarvestFruitSpriteTime);
+            m_WaitForPlayPartialAnimation = new WaitForSeconds(Player.PlayPartialAnimationTime);
+            m_WaitForPlayRemainingAnimation = new WaitForSeconds(Player.PlayRemainingAnimationTime);
+            m_WaitForShowHarvestFruitSprite = new WaitForSeconds(Player.ShowHarvestFruitSpriteTime);
         }
 
         private void Update()
@@ -120,6 +119,29 @@ namespace SimpleFarmingGame.Game
             }
         }
 
+        /// <summary>
+        /// 根据传入的物品详情的物品类型匹配玩家动作
+        /// </summary>
+        /// <param name="itemDetails">物品详情</param>
+        /// <returns>返回玩家动作</returns>
+        private PlayerActionEnum MatchPlayerAction(ItemDetails itemDetails)
+        {
+            PlayerActionEnum retAction = itemDetails.ItemType switch
+            {
+                ItemType.Seed => PlayerActionEnum.Carry
+              , ItemType.Commodity => PlayerActionEnum.Carry
+              , ItemType.HoeTool => PlayerActionEnum.Hoe
+              , ItemType.WaterTool => PlayerActionEnum.Water
+              , ItemType.CollectTool => PlayerActionEnum.Collect
+              , ItemType.AxeTool => PlayerActionEnum.Chop
+              , ItemType.PickAxeTool => PlayerActionEnum.Break
+              , ItemType.SickleTool => PlayerActionEnum.Reap
+              , ItemType.Furniture => PlayerActionEnum.None
+              , _ => PlayerActionEnum.None
+            };
+            return retAction;
+        }
+
         #region Event
 
         /// <summary>
@@ -129,7 +151,7 @@ namespace SimpleFarmingGame.Game
         /// <param name="isSelected">是否点击选择</param>
         private void SwitchPlayerActionAndSetupHoldItemSprite(ItemDetails itemDetails, bool isSelected)
         {
-            PlayerActionEnum currentPlayerAction = itemDetails.MatchPlayerAction(itemDetails);
+            PlayerActionEnum currentPlayerAction = MatchPlayerAction(itemDetails);
 
             if (isSelected == false)
             {
