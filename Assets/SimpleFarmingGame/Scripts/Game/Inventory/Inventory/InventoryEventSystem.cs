@@ -5,11 +5,11 @@ namespace SimpleFarmingGame.Game
 {
     public static partial class EventSystem
     {
-        public static Action<InventoryLocation, List<InventoryItem>> UpdateInventoryUI;
+        public static Action<InventoryLocation, List<InventoryItem>> RefreshInventoryUI;
 
-        public static void CallUpdateInventoryUI(InventoryLocation location, List<InventoryItem> itemList)
+        public static void CallRefreshInventoryUI(InventoryLocation location, List<InventoryItem> itemList)
         {
-            UpdateInventoryUI?.Invoke(location, itemList);
+            RefreshInventoryUI?.Invoke(location, itemList);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace SimpleFarmingGame.Game
 
         [SerializeField] private List<AnimatorType> AnimatorTypes;
 
-        private Dictionary<string, Animator> m_AnimatorComponentDict = new();
+        private Dictionary<string, Animator> m_AnimatorComponentsDict = new();
         private Animator[] m_Animators;
         private SpriteRenderer m_HoldItemSprite;
 
@@ -54,7 +54,7 @@ namespace SimpleFarmingGame.Game
             m_Animators = GetComponentsInChildren<Animator>();
             foreach (Animator animator in m_Animators)
             {
-                m_AnimatorComponentDict.Add(animator.name, animator);
+                m_AnimatorComponentsDict.Add(animator.name, animator);
             }
 
             m_HoldItemSprite = transform.Find("HoldItem").GetComponent<SpriteRenderer>();
@@ -83,7 +83,7 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.ItemSelectedEvent += SwitchPlayerActionAndSetupHoldItemSprite; // InventorySystem
+            EventSystem.ItemSelectedEvent += SwitchPlayerActionAndSetupHoldItemSprite;
             EventSystem.BeforeSceneUnloadedEvent += ResetPlayerState;
             EventSystem.MouseClickedEvent += OnMouseClickedEvent;
             EventSystem.SpawnFruitAtPlayerPosition += ShowHarvestFruitSprite;
@@ -91,7 +91,7 @@ namespace SimpleFarmingGame.Game
 
         private void OnDisable()
         {
-            EventSystem.ItemSelectedEvent -= SwitchPlayerActionAndSetupHoldItemSprite; // InventorySystem
+            EventSystem.ItemSelectedEvent -= SwitchPlayerActionAndSetupHoldItemSprite;
             EventSystem.BeforeSceneUnloadedEvent -= ResetPlayerState;
             EventSystem.MouseClickedEvent -= OnMouseClickedEvent;
             EventSystem.SpawnFruitAtPlayerPosition -= ShowHarvestFruitSprite;
@@ -107,12 +107,12 @@ namespace SimpleFarmingGame.Game
             {
                 if (animatorType.PlayerActionEnum == playerAction)
                 {
-                    m_AnimatorComponentDict[animatorType.BodyPartNamesEnum.ToString()].runtimeAnimatorController
+                    m_AnimatorComponentsDict[animatorType.BodyPartNamesEnum.ToString()].runtimeAnimatorController
                         = animatorType.AnimatorOverrideController;
                 }
                 else if (animatorType.PlayerActionEnum == PlayerActionEnum.None)
                 {
-                    m_AnimatorComponentDict[animatorType.BodyPartNamesEnum.ToString()].runtimeAnimatorController
+                    m_AnimatorComponentsDict[animatorType.BodyPartNamesEnum.ToString()].runtimeAnimatorController
                         = animatorType.AnimatorOverrideController;
                 }
             }
@@ -123,7 +123,7 @@ namespace SimpleFarmingGame.Game
         /// </summary>
         /// <param name="itemDetails">物品详情</param>
         /// <returns>返回玩家动作</returns>
-        private PlayerActionEnum MatchPlayerAction(ItemDetails itemDetails)
+        private static PlayerActionEnum MatchPlayerAction(ItemDetails itemDetails)
         {
             PlayerActionEnum retAction = itemDetails.ItemType switch
             {

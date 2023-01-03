@@ -3,18 +3,25 @@ using UnityEngine;
 
 namespace SimpleFarmingGame.Game
 {
-
     public class InventoryManager : Singleton<InventoryManager>, ISavable
     {
-        public ItemDataListSO ItemData;
-        public InventoryBagSO PlayerBagTemp;
-        public InventoryBagSO PlayerBag;
-        public BluePrintDataListSO BluePrintData;
-        [Header("Transaction")] public int PlayerMoney;
-        private InventoryBagSO m_CurrentBoxBag;
+        [Tooltip("物品数据")] public ItemDataListSO ItemData;
+        [SerializeField, Tooltip("玩家背包数据模板")] private InventoryBagSO PlayerBagTemp;
+        [SerializeField, Tooltip("玩家背包数据")] private InventoryBagSO PlayerBag;
+
+        [Tooltip("蓝图数据")] public BluePrintDataListSO BluePrintData;
+
+        public int PlayerMoney;
 
         private Dictionary<string, List<InventoryItem>> m_BoxDataDict = new();
+        private InventoryBagSO m_CurrentBoxBag;
         public int BoxDataCount => m_BoxDataDict.Count;
+
+        private void Start()
+        {
+            ISavable savable = this;
+            savable.RegisterSavable();
+        }
 
         private void OnEnable()
         {
@@ -22,7 +29,7 @@ namespace SimpleFarmingGame.Game
             EventSystem.SpawnFruitAtPlayerPosition += SpawnFruitAtPlayerBag;
             EventSystem.BuildFurnitureEvent += OnBuildFurnitureEvent;
             EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent; // UI
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
         }
 
         private void OnDisable()
@@ -31,32 +38,27 @@ namespace SimpleFarmingGame.Game
             EventSystem.SpawnFruitAtPlayerPosition -= SpawnFruitAtPlayerBag;
             EventSystem.BuildFurnitureEvent -= OnBuildFurnitureEvent;
             EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
-        }
-
-        private void Start()
-        {
-            ISavable savable = this;
-            savable.RegisterSavable();
-            // EventSystem.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
         }
 
         public ItemDetails GetItemDetails(int itemID) => ItemData.GetItemDetails(itemID);
 
-        public void AddItemInBag(Item item, bool destroy)
+        /// <summary>
+        /// 添加物品进背包
+        /// </summary>
+        /// <param name="item">添加的物品</param>
+        public void AddItemToBag(Item item)
         {
-            // var index = GetItemIndexByItemID(item.ItemID);
-            // AddItemInBagAtIndex(item.ItemID, index, 1);
-
-            GetItemIndexByItemID(item.ItemID, out int index);
+            GetItemIndexInBag(item.ItemID, out int index);
             AddItemInBagAtIndex(item.ItemID, index, 1);
-
-            if (destroy) Destroy(item.gameObject);
-
-            EventSystem.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.CallRefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
 
-        private bool CheckBagCapacity()
+        /// <summary>
+        /// 检测背包是否有空位
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckBagForEmptySpace()
         {
             for (int i = 0; i < PlayerBag.ItemList.Count; ++i)
             {
@@ -66,11 +68,15 @@ namespace SimpleFarmingGame.Game
             return false;
         }
 
-        /// <returns>Return the item index or -1 if the item exists.</returns>
-        private void GetItemIndexByItemID(int itemID, out int index)
+        /// <summary>
+        /// 通过物品的<paramref name="itemID"/>获取物品在背包中的索引
+        /// </summary>
+        /// <param name="itemID">物品ID</param>
+        /// <param name="index">索引</param>
+        /// <returns>如果获取不到，则返回 index = -1</returns>
+        private void GetItemIndexInBag(int itemID, out int index)
         {
-            index = 0;
-            for (; index < PlayerBag.ItemList.Count; ++index)
+            for (index = 0; index < PlayerBag.ItemList.Count; ++index)
             {
                 if (PlayerBag.ItemList[index].ItemID == itemID) return;
             }
@@ -78,23 +84,27 @@ namespace SimpleFarmingGame.Game
             index = -1;
         }
 
+        /// <summary>
+        /// 将指定<paramref name="itemID"/>物品添加到背包指定索引处
+        /// </summary>
+        /// <param name="itemID">物品ID</param>
+        /// <param name="index">索引</param>
+        /// <param name="amount">数量</param>
         private void AddItemInBagAtIndex(int itemID, int index, int amount)
         {
             InventoryItem inventoryItem = new InventoryItem { ItemID = itemID };
 
-            if (index == -1 && CheckBagCapacity()) // Bag don't have this item and bag have empty Position.
+            if (index == -1 && CheckBagForEmptySpace()) // 背包没有该物品但背包有空位
             {
                 inventoryItem.ItemAmount = amount;
                 for (int i = 0; i < PlayerBag.ItemList.Count; ++i)
                 {
-                    if (PlayerBag.ItemList[i].ItemID == 0)
-                    {
-                        PlayerBag.ItemList[i] = inventoryItem;
-                        break;
-                    }
+                    if (PlayerBag.ItemList[i].ItemID != 0) continue; // 找背包空位
+                    PlayerBag.ItemList[i] = inventoryItem;
+                    break;
                 }
             }
-            else // Bag already have this item.
+            else // 背包已经有这个物品
             {
                 int newAmount = PlayerBag.ItemList[index].ItemAmount + amount;
                 inventoryItem.ItemAmount = newAmount;
@@ -102,70 +112,120 @@ namespace SimpleFarmingGame.Game
             }
         }
 
+        /// <summary>
+        /// 通过索引在玩家背包内交换物品位置（物品数据）
+        /// </summary>
+        /// <param name="fromIndex">当前索引</param>
+        /// <param name="targetIndex">目标索引</param>
         public void SwapItemsWithinPlayerBag(int fromIndex, int targetIndex)
         {
             InventoryItem currentItem = PlayerBag.ItemList[fromIndex];
             InventoryItem targetItem = PlayerBag.ItemList[targetIndex];
 
-            if (targetItem.ItemID != 0) // if target Position have item
-            {
-                PlayerBag.ItemList[targetIndex] = currentItem;
-                PlayerBag.ItemList[fromIndex] = targetItem;
-            }
-            else // if target Position don't have item
+            if (targetItem.ItemID == 0) // 目标位置没有物品
             {
                 PlayerBag.ItemList[targetIndex] = currentItem;
                 PlayerBag.ItemList[fromIndex] = new InventoryItem();
             }
+            else // 目标位置已经有物品
+            {
+                PlayerBag.ItemList[targetIndex] = currentItem;
+                PlayerBag.ItemList[fromIndex] = targetItem;
+            }
 
-            EventSystem.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.CallRefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
 
+        /// <summary>
+        /// 跨背包交换数据
+        /// </summary>
+        /// <param name="fromLocation">当前库存位置</param>
+        /// <param name="fromIndex">当前索引</param>
+        /// <param name="targetLocation">目标库存位置</param>
+        /// <param name="targetIndex">目标索引</param>
         public void SwapItem
             (InventoryLocation fromLocation, int fromIndex, InventoryLocation targetLocation, int targetIndex)
         {
             List<InventoryItem> currentItemList = GetItemList(fromLocation);
             List<InventoryItem> targetItemList = GetItemList(targetLocation);
-            InventoryItem currentItem = currentItemList[fromIndex];
-            if (targetIndex < targetItemList.Count)
+
+            InventoryItem currentItem = currentItemList[fromIndex]; // 通过物品列表找到指定索引物品
+
+            if (targetIndex < targetItemList.Count) // 不做这个判断可能会导致索引越界
             {
                 InventoryItem targetItem = targetItemList[targetIndex];
 
-                if (targetItem.ItemID != 0 && currentItem.ItemID != targetItem.ItemID)
+                // // 目标位置不为空 并且 当前物品与目标位置物品不相同
+                // if (targetItem.ItemID != 0 && currentItem.ItemID != targetItem.ItemID)
+                // {
+                //     currentItemList[fromIndex] = targetItem;
+                //     targetItemList[targetIndex] = currentItem;
+                // }
+                // // 目标位置不为空 并且 当前物品与目标位置物品相同
+                // else if (targetItem.ItemID != 0 && currentItem.ItemID == targetItem.ItemID)
+                // {
+                //     targetItem.ItemAmount += currentItem.ItemAmount;
+                //     targetItemList[targetIndex] = targetItem;
+                //     currentItemList[fromIndex] = new InventoryItem();
+                // }
+                // // 目标位置为空
+                // else
+                // {
+                //     targetItemList[targetIndex] = currentItem;
+                //     currentItemList[fromIndex] = new InventoryItem();
+                // }
+
+                #region TEST
+
+                // 目标位置不为空
+                if (targetItem.ItemID != 0)
                 {
-                    currentItemList[fromIndex] = targetItem;
-                    targetItemList[targetIndex] = currentItem;
+                    // 当前物品与目标位置物品不相同
+                    if (currentItem.ItemID != targetItem.ItemID)
+                    {
+                        currentItemList[fromIndex] = targetItem;
+                        targetItemList[targetIndex] = currentItem;
+                    }
+                    // 当前物品与目标位置物品相同
+                    else
+                    {
+                        targetItem.ItemAmount += currentItem.ItemAmount;
+                        targetItemList[targetIndex] = targetItem;
+                        currentItemList[fromIndex] = new InventoryItem();
+                    }
                 }
-                else if (targetItem.ItemID != 0 && currentItem.ItemID == targetItem.ItemID)
+                // 目标位置为空
+                else
                 {
-                    targetItem.ItemAmount += currentItem.ItemAmount;
-                    targetItemList[targetIndex] = targetItem;
+                    targetItemList[targetIndex] = currentItem;
                     currentItemList[fromIndex] = new InventoryItem();
                 }
-                else // targetItem.ItemID == 0
-                {
-                    targetItemList[targetIndex] = currentItem;
-                    currentItemList[fromIndex] = new InventoryItem();
-                }
+
+                #endregion
             }
 
-            EventSystem.UpdateInventoryUI(fromLocation, currentItemList);
-            EventSystem.UpdateInventoryUI(targetLocation, targetItemList);
+            EventSystem.RefreshInventoryUI(fromLocation, currentItemList);
+            EventSystem.RefreshInventoryUI(targetLocation, targetItemList);
         }
 
-        private List<InventoryItem> GetItemList(InventoryLocation location)
+        /// <summary>
+        /// 通过库存位置获取物品列表
+        /// </summary>
+        /// <param name="inventoryLocation">库存位置</param>
+        /// <returns>根据库存位置返回库存物品列表</returns>
+        private List<InventoryItem> GetItemList(InventoryLocation inventoryLocation)
         {
-            return location switch
+            return inventoryLocation switch
             {
-                InventoryLocation.Player => PlayerBag.ItemList
-              , InventoryLocation.Box => m_CurrentBoxBag.ItemList
+                InventoryLocation.PlayerBag => PlayerBag.ItemList
+              , InventoryLocation.StorageBox => m_CurrentBoxBag.ItemList
               , _ => null
             };
         }
 
         private void RemoveItem(int itemID, int removeAmount)
         {
-            GetItemIndexByItemID(itemID, out int index);
+            GetItemIndexInBag(itemID, out int index);
             if (PlayerBag.ItemList[index].ItemAmount > removeAmount)
             {
                 int remainAmount = PlayerBag.ItemList[index].ItemAmount - removeAmount;
@@ -178,7 +238,7 @@ namespace SimpleFarmingGame.Game
                 PlayerBag.ItemList[index] = inventoryItem;
             }
 
-            EventSystem.UpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.RefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
 
         private void OnDropItemEvent(int itemID, Vector3 position, ItemType itemType)
@@ -188,9 +248,9 @@ namespace SimpleFarmingGame.Game
 
         private void SpawnFruitAtPlayerBag(int cropID)
         {
-            GetItemIndexByItemID(cropID, out int index);
+            GetItemIndexInBag(cropID, out int index);
             AddItemInBagAtIndex(cropID, index, 1);
-            EventSystem.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.CallRefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
 
         // 在背包当中移除图纸 InventoryManager
@@ -215,7 +275,7 @@ namespace SimpleFarmingGame.Game
             PlayerBag = Instantiate(PlayerBagTemp);
             PlayerMoney = 300;
             m_BoxDataDict.Clear();
-            EventSystem.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.CallRefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
 
         /// <summary>
@@ -249,7 +309,7 @@ namespace SimpleFarmingGame.Game
         public void TransactionItem(ItemDetails itemDetails, int amount, bool isSell)
         {
             int cost = itemDetails.ItemPrice * amount; // 计算金额
-            GetItemIndexByItemID(itemDetails.ItemID, out int index);
+            GetItemIndexInBag(itemDetails.ItemID, out int index);
             if (isSell)
             {
                 if (PlayerBag.ItemList[index].ItemAmount >= amount)
@@ -262,7 +322,7 @@ namespace SimpleFarmingGame.Game
             }
             else if (PlayerMoney - cost >= 0)
             {
-                if (CheckBagCapacity())
+                if (CheckBagForEmptySpace())
                 {
                     AddItemInBagAtIndex(itemDetails.ItemID, index, amount);
                 }
@@ -270,7 +330,7 @@ namespace SimpleFarmingGame.Game
                 PlayerMoney -= cost;
             }
 
-            EventSystem.UpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
+            EventSystem.RefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
 
         public List<InventoryItem> GetBoxDataList(string key) =>
@@ -286,6 +346,8 @@ namespace SimpleFarmingGame.Game
 
             Debug.Log(key);
         }
+
+        #region Save
 
         public string GUID => GetComponent<DataGUID>().GUID;
 
@@ -315,8 +377,10 @@ namespace SimpleFarmingGame.Game
         public void RestoreData(GameSaveData saveData)
         {
             PlayerMoney = saveData.PlayerMoney;
+
             PlayerBag = Instantiate(PlayerBagTemp);
             PlayerBag.ItemList = saveData.InventoryDict[PlayerBag.name];
+
             foreach (var (key, value) in saveData.InventoryDict)
             {
                 if (m_BoxDataDict.ContainsKey(key))
@@ -325,8 +389,10 @@ namespace SimpleFarmingGame.Game
                 }
             }
 
-            EventSystem.CallUpdateInventoryUI(InventoryLocation.Player, PlayerBag.ItemList);
-            // 刷新 PlayerMoney
+            // 刷新UI
+            EventSystem.CallRefreshInventoryUI(InventoryLocation.PlayerBag, PlayerBag.ItemList);
         }
+
+        #endregion
     }
 }

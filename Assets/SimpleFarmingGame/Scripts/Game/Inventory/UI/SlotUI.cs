@@ -47,9 +47,9 @@ namespace SimpleFarmingGame.Game
         public InventoryLocation Location =>
             SlotType switch
             {
-                SlotType.Bag => InventoryLocation.Player
-              , SlotType.Box => InventoryLocation.Box
-              , _ => InventoryLocation.Player
+                SlotType.Bag => InventoryLocation.PlayerBag
+              , SlotType.Box => InventoryLocation.StorageBox
+              , _ => InventoryLocation.PlayerBag
                 // FIXME: 后续应该给Shop添加对应的InventoryLocation,即使Shop不是Inventory
             };
 
@@ -137,19 +137,20 @@ namespace SimpleFarmingGame.Game
 
                 int targetIndex = targetSlot.SlotIndex;
 
-                if (SwapLocation(targetSlot))
+                // BUG: 这里需要重构
+                if (IsSwapInPlayerBag(targetSlot))
                 {
                     InventoryManager.Instance.SwapItemsWithinPlayerBag(this.SlotIndex, targetIndex);
                 }
-                else if (Buy(targetSlot))
+                else if (IsBuyFromStore(targetSlot))
                 {
                     EventSystem.CallShowTransactionUIEvent(ItemDetails, false);
                 }
-                else if (Sell(targetSlot))
+                else if (IsSellToStore(targetSlot))
                 {
                     EventSystem.CallShowTransactionUIEvent(ItemDetails, true);
                 }
-                else if (IsBox(targetSlot))
+                else if (IsBox(targetSlot) || IsSwapInStorageBox(targetSlot))
                 {
                     // 跨背包数据交换物品
                     InventoryManager.Instance.SwapItem
@@ -186,9 +187,17 @@ namespace SimpleFarmingGame.Game
             #endregion
         }
 
-        private bool SwapLocation(SlotUI targetSlot) => SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Bag;
-        private bool Buy(SlotUI targetSlot) => SlotType == SlotType.Shop && targetSlot.SlotType == SlotType.Bag;
-        private bool Sell(SlotUI targetSlot) => SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Shop;
+        private bool IsSwapInPlayerBag(SlotUI targetSlot) =>
+            SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Bag;
+
+        private bool IsSwapInStorageBox(SlotUI targetSlot) =>
+            SlotType == SlotType.Box && targetSlot.SlotType == SlotType.Box;
+
+        private bool IsBuyFromStore(SlotUI targetSlot) =>
+            SlotType == SlotType.Shop && targetSlot.SlotType == SlotType.Bag;
+
+        private bool IsSellToStore(SlotUI targetSlot) =>
+            SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Shop;
 
         private bool IsBox(SlotUI targetSlot) =>
             SlotType != SlotType.Shop && targetSlot.SlotType != SlotType.Shop && SlotType != targetSlot.SlotType;

@@ -19,7 +19,7 @@ MonoBehaviour:
     ItemIcon: {fileID: 21300000, guid: 3714c3e6b5e3d498ebcd06d432b3dd89, type: 3}
     ItemIconOnWorld: {fileID: 0}
     ItemDescription: 
-    ItemUseRadius: 2
+    ItemUseRadius: 1
     CanPickedUp: 1
     CanDropped: 0
     CanCarried: 0

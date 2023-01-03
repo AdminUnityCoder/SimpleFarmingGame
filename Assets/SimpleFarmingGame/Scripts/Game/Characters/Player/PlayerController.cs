@@ -49,21 +49,21 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.BeforeSceneUnloadedEvent += DisableInput;       // TransitionManager
-            EventSystem.AfterSceneLoadedEvent += EnableInput;           // TransitionManager
-            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;   // TransitionManager
-            EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent; // Game
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent;       // UI
+            EventSystem.BeforeSceneUnloadedEvent += DisableInput;
+            EventSystem.AfterSceneLoadedEvent += EnableInput;
+            EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;
+            EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
+            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
-            EventSystem.BeforeSceneUnloadedEvent -= DisableInput;     // TransitionManager
-            EventSystem.AfterSceneLoadedEvent -= EnableInput;         // TransitionManager
-            EventSystem.MoveToPositionEvent -= OnMoveToPositionEvent; // TransitionManager
+            EventSystem.BeforeSceneUnloadedEvent -= DisableInput;
+            EventSystem.AfterSceneLoadedEvent -= EnableInput;
+            EventSystem.MoveToPositionEvent -= OnMoveToPositionEvent;
             EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
+            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
             EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 

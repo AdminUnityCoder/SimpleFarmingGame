@@ -1,3 +1,4 @@
+using MyFramework;
 using UnityEngine;
 
 namespace SimpleFarmingGame.Game
@@ -6,17 +7,11 @@ namespace SimpleFarmingGame.Game
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out Item item))
-            {
-                if (item != null)
-                {
-                    if (item.ItemDetails.CanPickedUp)
-                    {
-                        InventoryManager.Instance.AddItemInBag(item, true);
-                        EventSystem.CallPlaySoundEvent(SoundName.PickupPop);
-                    }
-                }
-            }
+            if (!other.TryGetComponent(out Item item)) return;
+            if (!item.ItemDetails.CanPickedUp) return;
+            InventoryManager.Instance.AddItemToBag(item);
+            item.DestroyGameObj();
+            EventSystem.CallPlaySoundEvent(SoundName.PickupPop);
         }
     }
 }

@@ -11,10 +11,5 @@ namespace SimpleFarmingGame.Game
         {
             EventSystem.CallPlaySoundEvent(SoundName.FootStepSoft);
         }
-
-        // public void FootStepHardSound()
-        // {
-        //     EventSystem.CallPlaySoundEvent(SoundName.FootStepHard);
-        // }
     }
 }

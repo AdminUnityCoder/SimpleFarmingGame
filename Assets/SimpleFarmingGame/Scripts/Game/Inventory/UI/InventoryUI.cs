@@ -40,7 +40,7 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.UpdateInventoryUI += OnUpdateInventoryUI;
+            EventSystem.RefreshInventoryUI += OnUpdateInventoryUI;
             EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
             EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
             EventSystem.BaseBagCloseEvent += OnBaseBagCloseEvent;
@@ -49,7 +49,7 @@ namespace SimpleFarmingGame.Game
 
         private void OnDisable()
         {
-            EventSystem.UpdateInventoryUI -= OnUpdateInventoryUI;
+            EventSystem.RefreshInventoryUI -= OnUpdateInventoryUI;
             EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
             EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
             EventSystem.BaseBagCloseEvent -= OnBaseBagCloseEvent;
@@ -81,7 +81,7 @@ namespace SimpleFarmingGame.Game
         {
             switch (location)
             {
-                case InventoryLocation.Player:
+                case InventoryLocation.PlayerBag:
                     for (int i = 0; i < PlayerSlots.Length; ++i)
                     {
                         if (itemList[i].ItemAmount > 0)
@@ -97,7 +97,7 @@ namespace SimpleFarmingGame.Game
                     }
 
                     break;
-                case InventoryLocation.Box:
+                case InventoryLocation.StorageBox:
                     for (int i = 0; i < BaseBagSlotList.Count; ++i)
                     {
                         if (itemList[i].ItemAmount > 0)
@@ -148,7 +148,7 @@ namespace SimpleFarmingGame.Game
                 m_IsBagOpened = true;
             }
 
-            OnUpdateInventoryUI(InventoryLocation.Box, bagData.ItemList);
+            OnUpdateInventoryUI(InventoryLocation.StorageBox, bagData.ItemList);
         }
 
         private void OnBaseBagCloseEvent(SlotType slotType, InventoryBagSO bagData)
@@ -184,11 +184,11 @@ namespace SimpleFarmingGame.Game
             }
         }
 
+        // BUG: 这里只循环遍历PlayerSlots，没有循环遍历储物箱，所以会导致储物箱点击了无法显示Highlight
         public void DisplaySlotHighlight(int index)
         {
-            for (var slotIndex = 0; slotIndex < PlayerSlots.Length; slotIndex++)
+            foreach (var playerSlot in PlayerSlots)
             {
-                var playerSlot = PlayerSlots[slotIndex];
                 if (playerSlot.IsSelected && playerSlot.SlotIndex == index)
                 {
                     playerSlot.DisplaySlotSelectHighlight();

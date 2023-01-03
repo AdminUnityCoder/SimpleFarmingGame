@@ -50,5 +50,26 @@ namespace MyFramework
         }
 
         #endregion
+
+        #region DestroyGameObj
+
+        public static void DestroyGameObj<T>(this T selfBehaviour) where T : Component
+        {
+            selfBehaviour.gameObject.DestroySelf();
+        }
+
+        #endregion
+    }
+
+    public static class ObjectExtension
+    {
+        #region Destroy Self
+
+        public static void DestroySelf<T>(this T selfObj) where T : Object
+        {
+            Object.Destroy(selfObj);
+        }
+
+        #endregion
     }
 }
