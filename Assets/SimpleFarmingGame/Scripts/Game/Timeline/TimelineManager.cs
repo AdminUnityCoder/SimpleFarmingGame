@@ -10,6 +10,7 @@ namespace SimpleFarmingGame.Game
 
         private bool m_IsPause;
         private bool m_IsDialogueFinished;
+        private bool m_IsFirstLoaded;
 
         public bool IsDialogueFinished
         {
@@ -70,9 +71,10 @@ namespace SimpleFarmingGame.Game
         private void OnAfterSceneLoadedEvent()
         {
             m_CurrentDirector = FindObjectOfType<PlayableDirector>();
-            if (m_CurrentDirector != null)
+            if (m_CurrentDirector != null && m_IsFirstLoaded == false)
             {
                 m_CurrentDirector.Play();
+                m_IsFirstLoaded = true;
             }
         }
     }

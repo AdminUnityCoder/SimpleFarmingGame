@@ -450,23 +450,9 @@ MonoBehaviour:
   ItemSprite: {fileID: 6791474390695074576}
   AmountTextUI: {fileID: 6791474391580811360}
   SlotSelectHighlight: {fileID: 6791474391282977713}
-  SlotType: 2
   SlotIndex: 0
   IsSelected: 0
-  ItemAmount: 0
-  ItemDetails:
-    ItemID: 0
-    ItemName: 
-    ItemType: 0
-    ItemIcon: {fileID: 0}
-    ItemIconOnWorld: {fileID: 0}
-    ItemDescription: 
-    ItemUseRadius: 0
-    CanPickedUp: 0
-    CanDropped: 0
-    CanCarried: 0
-    ItemPrice: 0
-    SellPercentage: 0
+  m_SlotType: 2
 --- !u!114 &6552407185997275199
 MonoBehaviour:
   m_ObjectHideFlags: 0

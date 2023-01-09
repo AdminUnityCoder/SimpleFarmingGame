@@ -185,26 +185,52 @@ namespace SimpleFarmingGame.Game
         }
 
         // BUG: 这里只循环遍历PlayerSlots，没有循环遍历储物箱，所以会导致储物箱点击了无法显示Highlight
-        public void DisplaySlotHighlight(int index)
+        public void DisplaySlotHighlight(int index, SlotType slotType)
         {
-            foreach (var playerSlot in PlayerSlots)
+            switch (slotType)
             {
-                if (playerSlot.IsSelected && playerSlot.SlotIndex == index)
-                {
-                    playerSlot.DisplaySlotSelectHighlight();
-                }
-                else
-                {
-                    playerSlot.CancelDisplaySlotSelectHighlight();
-                }
+                case SlotType.Bag:
+                    foreach (var playerSlot in PlayerSlots)
+                    {
+                        if (playerSlot.IsSelected && playerSlot.SlotIndex == index)
+                        {
+                            playerSlot.DisplaySlotSelectHighlight();
+                        }
+                        else
+                        {
+                            playerSlot.CancelDisplaySlotSelectHighlight();
+                        }
+                    }
+
+                    break;
+                case SlotType.Shop:
+                case SlotType.Box:
+                    foreach (var baseBagSlot in BaseBagSlotList)
+                    {
+                        if (baseBagSlot.IsSelected && baseBagSlot.SlotIndex == index)
+                        {
+                            baseBagSlot.DisplaySlotSelectHighlight();
+                        }
+                        else
+                        {
+                            baseBagSlot.CancelDisplaySlotSelectHighlight();
+                        }
+                    }
+
+                    break;
             }
         }
 
         public void CancelDisplayAllSlotHighlight()
         {
-            for (var slotIndex = 0; slotIndex < PlayerSlots.Length; slotIndex++)
+            foreach (var slot in PlayerSlots)
             {
-                PlayerSlots[slotIndex].CancelDisplaySlotSelectHighlight();
+                slot.CancelDisplaySlotSelectHighlight();
+            }
+
+            foreach (var slot in BaseBagSlotList)
+            {
+                slot.CancelDisplaySlotSelectHighlight();
             }
         }
 
@@ -214,19 +240,17 @@ namespace SimpleFarmingGame.Game
 
         public void ShowDragItemImage(Sprite itemSprite)
         {
-            DragItemImage.enabled = true;      // Show DragItem Image
-            DragItemImage.sprite = itemSprite; // Set DragItem Sprite
-            DragItemImage.SetNativeSize();
+            DragItemImage.Enable().SetSprite(itemSprite).SetNativeSize();
         }
 
         public void HideDragItemImage()
         {
-            DragItemImage.enabled = false;
+            DragItemImage.Disable();
         }
 
-        public void SetDragItemImagePosition(Vector3 pos)
+        public void SetDragItemImagePosition(Vector3 position)
         {
-            DragItemImage.transform.position = pos;
+            DragItemImage.SetPosition(position);
         }
 
         #endregion
@@ -235,18 +259,18 @@ namespace SimpleFarmingGame.Game
 
         public void ShowItemTooltip(SlotUI slotUI)
         {
-            ItemTooltip.gameObject.SetActive(true);
-            ItemTooltip.SetupTooltip(slotUI.ItemDetails, slotUI.SlotType);
-            ItemTooltip.transform.position = slotUI.transform.position + Vector3.up * 60;
+            ItemTooltip.Show()
+                       .SetupTooltip(slotUI.ItemDetails, slotUI.SlotType)
+                       .SetPosition(slotUI.transform.position + Vector3.up * 60);
 
             if (slotUI.ItemDetails.ItemType == ItemType.Furniture)
             {
-                ItemTooltip.RequireResourcePanel.gameObject.SetActive(true);
-                ItemTooltip.SetupRequireResourcePanel(slotUI.ItemDetails.ItemID);
+                ItemTooltip.ShowRequireResourcePanel()
+                           .SetupRequireResourcePanel(slotUI.ItemDetails.ItemID);
             }
             else
             {
-                ItemTooltip.RequireResourcePanel.gameObject.SetActive(false);
+                ItemTooltip.HideRequireResourcePanel();
             }
         }
 

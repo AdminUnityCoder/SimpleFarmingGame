@@ -37,7 +37,7 @@ namespace SimpleFarmingGame.Game
                     m_SlotUI.IsSelected = !m_SlotUI.IsSelected;
                     if (m_SlotUI.IsSelected)
                     {
-                        m_SlotUI.m_InventoryUI.DisplaySlotHighlight(m_SlotUI.SlotIndex);
+                        m_SlotUI.m_InventoryUI.DisplaySlotHighlight(m_SlotUI.SlotIndex, m_SlotUI.SlotType);
                     }
                     else
                     {

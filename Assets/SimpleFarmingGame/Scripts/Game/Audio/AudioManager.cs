@@ -34,7 +34,7 @@ namespace SimpleFarmingGame.Game
         {
             EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.PlaySoundEvent -= OnPlaySoundEvent;
-            EventSystem.EndGameEvent += OnEndGameEvent;
+            EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 
         private void OnAfterSceneLoadedEvent()

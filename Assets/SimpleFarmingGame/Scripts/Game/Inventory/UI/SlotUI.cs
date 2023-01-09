@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,114 +7,53 @@ namespace SimpleFarmingGame.Game
 {
     public enum SlotType { Bag, Box, Shop }
 
-    public static partial class EventSystem
-    {
-        public static event Action<ItemDetails, bool> ItemSelectedEvent;
-
-        public static void CallItemSelectedEvent(ItemDetails itemDetails, bool isSelected)
-        {
-            ItemSelectedEvent?.Invoke(itemDetails, isSelected);
-        }
-
-        public static event Action<ItemDetails, bool> ShowTransactionUIEvent;
-
-        /// <param name="itemDetails">物品详情</param>
-        /// <param name="isSell">是否是卖</param>
-        public static void CallShowTransactionUIEvent(ItemDetails itemDetails, bool isSell)
-        {
-            ShowTransactionUIEvent?.Invoke(itemDetails, isSell);
-        }
-    }
-
     public sealed class SlotUI : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         /*
          * 因为需要一开始将 PlayerBag 隐藏，如果不使用组件拖拽的方式进行组件的获取
          * 而是在 Awake 中获取组件，会导致获取不到已经隐藏的物体身上的组件
          */
-        [Header("Component")] [SerializeField] private Button Button;
+        [SerializeField, Header("Component")] private Button Button;
         [SerializeField] private Image ItemSprite;
         [SerializeField] private TextMeshProUGUI AmountTextUI;
         [SerializeField] private Image SlotSelectHighlight;
-        public SlotType SlotType;
+        [SerializeField] private SlotType m_SlotType;
         public int SlotIndex;
         public bool IsSelected;
-        public int ItemAmount;
-        public ItemDetails ItemDetails;
+        private int m_ItemAmount;
+        private ItemDetails m_ItemDetails;
+        public ItemDetails ItemDetails => m_ItemDetails;
+        public SlotType SlotType => m_SlotType;
         public InventoryUI m_InventoryUI => GetComponentInParent<InventoryUI>();
 
-        public InventoryLocation Location =>
-            SlotType switch
+        private InventoryLocation Location
+        {
+            get
             {
-                SlotType.Bag => InventoryLocation.PlayerBag
-              , SlotType.Box => InventoryLocation.StorageBox
-              , _ => InventoryLocation.PlayerBag
-                // FIXME: 后续应该给Shop添加对应的InventoryLocation,即使Shop不是Inventory
-            };
+                return m_SlotType switch
+                {
+                    SlotType.Bag => InventoryLocation.PlayerBag
+                  , SlotType.Box => InventoryLocation.StorageBox
+                  , _ => InventoryLocation.PlayerBag
+                    // FIXME: 后续应该给Shop添加对应的InventoryLocation,即使Shop不是Inventory
+                };
+            }
+        }
 
         private void Start()
         {
             IsSelected = false;
-            if (ItemDetails == null)
+            if (m_ItemDetails == null)
             {
                 SetSlotEmpty();
             }
         }
 
-        public void SetSlotEmpty()
-        {
-            if (IsSelected)
-            {
-                IsSelected = false;
-                m_InventoryUI.CancelDisplayAllSlotHighlight();
-                EventSystem.CallItemSelectedEvent(ItemDetails, IsSelected);
-            }
-
-            ItemDetails = null;
-            ItemSprite.enabled = false;
-            AmountTextUI.text = string.Empty;
-            Button.interactable = false;
-        }
-
-        public void SetSlot(ItemDetails itemDetails, int amount)
-        {
-            ItemDetails = itemDetails;
-            ItemAmount = amount;
-            ItemSprite.enabled = true;
-            ItemSprite.sprite = ItemDetails.ItemIcon;
-            AmountTextUI.text = ItemAmount.ToString();
-            Button.interactable = true;
-        }
-
-        public void DisplaySlotSelectHighlight()
-        {
-            SlotSelectHighlight.gameObject.SetActive(true);
-        }
-
-        public void CancelDisplaySlotSelectHighlight()
-        {
-            IsSelected = false;
-            SlotSelectHighlight.gameObject.SetActive(false);
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            if (ItemDetails == null) return;
-            IsSelected = !IsSelected;
-
-            m_InventoryUI.DisplaySlotHighlight(SlotIndex);
-
-            if (SlotType == SlotType.Bag)
-            {
-                EventSystem.CallItemSelectedEvent(this.ItemDetails, this.IsSelected);
-            }
-        }
-
         public void OnBeginDrag(PointerEventData eventData)
         {
-            if (ItemDetails == null) return;
+            if (m_ItemDetails == null) return;
             IsSelected = true;
-            m_InventoryUI.DisplaySlotHighlight(SlotIndex);
+            m_InventoryUI.DisplaySlotHighlight(SlotIndex, m_SlotType);
             m_InventoryUI.ShowDragItemImage(ItemSprite.sprite);
         }
 
@@ -130,10 +68,7 @@ namespace SimpleFarmingGame.Game
 
             if (eventData.pointerCurrentRaycast.gameObject != null)
             {
-                if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent(out SlotUI targetSlot) == false)
-                {
-                    return;
-                }
+                if (eventData.pointerCurrentRaycast.gameObject.TryGetComponent(out SlotUI targetSlot) == false) return;
 
                 int targetIndex = targetSlot.SlotIndex;
 
@@ -144,11 +79,11 @@ namespace SimpleFarmingGame.Game
                 }
                 else if (IsBuyFromStore(targetSlot))
                 {
-                    EventSystem.CallShowTransactionUIEvent(ItemDetails, false);
+                    EventSystem.CallShowTransactionUIEvent(m_ItemDetails, false);
                 }
                 else if (IsSellToStore(targetSlot))
                 {
-                    EventSystem.CallShowTransactionUIEvent(ItemDetails, true);
+                    EventSystem.CallShowTransactionUIEvent(m_ItemDetails, true);
                 }
                 else if (IsBox(targetSlot) || IsSwapInStorageBox(targetSlot))
                 {
@@ -187,19 +122,69 @@ namespace SimpleFarmingGame.Game
             #endregion
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (m_ItemDetails == null) return;
+            IsSelected = !IsSelected;
+
+            m_InventoryUI.DisplaySlotHighlight(SlotIndex, m_SlotType);
+
+            if (m_SlotType == SlotType.Bag)
+            {
+                EventSystem.CallItemSelectedEvent(m_ItemDetails, IsSelected);
+            }
+        }
+
+        public void SetSlotEmpty()
+        {
+            if (IsSelected)
+            {
+                IsSelected = false;
+                m_InventoryUI.CancelDisplayAllSlotHighlight();
+                EventSystem.CallItemSelectedEvent(m_ItemDetails, IsSelected);
+            }
+
+            m_ItemDetails = null;
+            ItemSprite.enabled = false;
+            AmountTextUI.text = string.Empty;
+            Button.interactable = false;
+        }
+
+        public void SetSlot(ItemDetails itemDetails, int amount)
+        {
+            m_ItemDetails = itemDetails;
+            m_ItemAmount = amount;
+            ItemSprite.enabled = true;
+            ItemSprite.sprite = m_ItemDetails.ItemIcon;
+            AmountTextUI.text = m_ItemAmount.ToString();
+            Button.interactable = true;
+        }
+
+        public void DisplaySlotSelectHighlight()
+        {
+            SlotSelectHighlight.gameObject.SetActive(true);
+        }
+
+        public void CancelDisplaySlotSelectHighlight()
+        {
+            IsSelected = false;
+            SlotSelectHighlight.gameObject.SetActive(false);
+        }
+
         private bool IsSwapInPlayerBag(SlotUI targetSlot) =>
-            SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Bag;
+            m_SlotType == SlotType.Bag && targetSlot.m_SlotType == SlotType.Bag;
 
         private bool IsSwapInStorageBox(SlotUI targetSlot) =>
-            SlotType == SlotType.Box && targetSlot.SlotType == SlotType.Box;
+            m_SlotType == SlotType.Box && targetSlot.m_SlotType == SlotType.Box;
 
         private bool IsBuyFromStore(SlotUI targetSlot) =>
-            SlotType == SlotType.Shop && targetSlot.SlotType == SlotType.Bag;
+            m_SlotType == SlotType.Shop && targetSlot.m_SlotType == SlotType.Bag;
 
         private bool IsSellToStore(SlotUI targetSlot) =>
-            SlotType == SlotType.Bag && targetSlot.SlotType == SlotType.Shop;
+            m_SlotType == SlotType.Bag && targetSlot.m_SlotType == SlotType.Shop;
 
         private bool IsBox(SlotUI targetSlot) =>
-            SlotType != SlotType.Shop && targetSlot.SlotType != SlotType.Shop && SlotType != targetSlot.SlotType;
+            m_SlotType != SlotType.Shop && targetSlot.m_SlotType != SlotType.Shop
+         && m_SlotType != targetSlot.m_SlotType;
     }
 }

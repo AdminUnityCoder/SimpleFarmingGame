@@ -60,5 +60,11 @@ namespace SimpleFarmingGame.Game
         public int AnimationInstanceID;
 
         #endregion
+
+        #region TimeLine
+
+        public bool IsNewCutSceneFirstLoaded;
+
+        #endregion
     }
 }

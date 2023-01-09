@@ -5,7 +5,7 @@ namespace SimpleFarmingGame.Game
     public static class TimeModel
     {
         [Tooltip("The smaller the number, the faster the time")]
-        public const float SecondThreshold = 0.012f; //0.12f;
+        public const float SecondThreshold = 0.12f;
 
         public const int SecondLimit = 59;
         public const int MinuteLimit = 59;

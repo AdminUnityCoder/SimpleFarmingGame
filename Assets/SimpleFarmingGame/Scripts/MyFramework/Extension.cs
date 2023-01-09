@@ -1,7 +1,26 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MyFramework
 {
+    public static class TransformExtension
+    {
+        #region Position
+
+        public static T SetPosition<T>(this T selfComponent, Vector3 position) where T : Component
+        {
+            selfComponent.transform.position = position;
+            return selfComponent;
+        }
+
+        public static Vector3 GetPosition<T>(this T selfComponent) where T : Component
+        {
+            return selfComponent.transform.position;
+        }
+
+        #endregion
+    }
+
     public static class BehaviourExtension
     {
         public static T Enable<T>(this T selfBehaviour) where T : Behaviour
@@ -13,6 +32,12 @@ namespace MyFramework
         public static T Disable<T>(this T selfBehaviour) where T : Behaviour
         {
             selfBehaviour.enabled = false;
+            return selfBehaviour;
+        }
+
+        public static T SetSprite<T>(this T selfBehaviour, Sprite sprite) where T : Image
+        {
+            selfBehaviour.sprite = sprite;
             return selfBehaviour;
         }
     }

@@ -1,3 +1,4 @@
+using MyFramework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,11 @@ namespace SimpleFarmingGame.Game
 {
     public class ItemTooltip : MonoBehaviour
     {
+        private const string SEED = "种子";
+        private const string COMMODITY = "商品";
+        private const string FURNITURE = "家具";
+        private const string TOOL = "工具";
+        private const string NULL = "无";
         [SerializeField] private RectTransform RectTransform;
 
         [Header("ChildrenComponent")]
@@ -16,19 +22,25 @@ namespace SimpleFarmingGame.Game
         [SerializeField] private TextMeshProUGUI DescriptionText;
         [SerializeField] private Text PriceText;
         [SerializeField] private GameObject BottomGameObject;
-        private readonly Vector2 m_BottomAnchorPoint = new(0.5f, 0f);
         [Header("建造家具")] public GameObject RequireResourcePanel;
 
         [SerializeField, Tooltip("建造家具所需要的资源")]
         private Image[] RequireResourceItems;
 
-        private const string SEED = "种子";
-        private const string COMMODITY = "商品";
-        private const string FURNITURE = "家具";
-        private const string TOOL = "工具";
-        private const string NULL = "无";
+        private readonly Vector2 m_BottomAnchorPoint = new(0.5f, 0f);
 
-        public void SetupTooltip(ItemDetails itemDetails, SlotType slotType)
+        public ItemTooltip ShowRequireResourcePanel()
+        {
+            RequireResourcePanel.Show();
+            return this;
+        }
+
+        public void HideRequireResourcePanel()
+        {
+            RequireResourcePanel.Hide();
+        }
+
+        public ItemTooltip SetupTooltip(ItemDetails itemDetails, SlotType slotType)
         {
             // Set the anchor point at the bottom
             RectTransform.pivot = m_BottomAnchorPoint;
@@ -64,6 +76,7 @@ namespace SimpleFarmingGame.Game
              * 强制立即重新生成受计算影响的布局元素和子布局元素。
              */
             LayoutRebuilder.ForceRebuildLayoutImmediate(RectTransform);
+            return this;
         }
 
         public void SetupRequireResourcePanel(int buildingPaperID)
