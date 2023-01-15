@@ -37,12 +37,12 @@ namespace SimpleFarmingGame.Game
         {
             EventSystem.ItemSelectedEvent -= OnItemSelectedEvent;
             EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
 
         private void Start()
         {
-            m_CursorCanvasTransform = GameObject.FindGameObjectWithTag("CursorCanvas").GetComponent<RectTransform>();
+            m_CursorCanvasTransform = GameObject.FindWithTag("CursorCanvas").GetComponent<RectTransform>();
             m_CursorImage = m_CursorCanvasTransform.GetChild(0).GetComponent<Image>();
             m_BuildImage = m_CursorCanvasTransform.GetChild(1).GetComponent<Image>();
             m_BuildImage.gameObject.SetActive(false);
@@ -307,7 +307,7 @@ namespace SimpleFarmingGame.Game
                     BluePrintDetails bluePrintDetails =
                         InventoryManager.Instance.BluePrintData.GetBluePrintDetails(m_CurrentItemDetails.ItemID);
                     if (tileDetails.CanPlaceFurniture
-                     && InventoryManager.Instance.CheckStorage(m_CurrentItemDetails.ItemID)
+                     && InventoryManager.Instance.CheckBuildingResourcesStock(m_CurrentItemDetails.ItemID)
                      && !CheckForFurnitureNearby(bluePrintDetails))
                     {
                         SetCursorAvailable();

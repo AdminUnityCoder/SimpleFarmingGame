@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using SimpleFarmingGame.Game;
 using UnityEngine;
 
 namespace SimpleFarmingGame.Game

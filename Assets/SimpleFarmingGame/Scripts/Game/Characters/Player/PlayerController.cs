@@ -53,7 +53,7 @@ namespace SimpleFarmingGame.Game
             EventSystem.AfterSceneLoadedEvent += EnableInput;
             EventSystem.MoveToPositionEvent += OnMoveToPositionEvent;
             EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
@@ -63,7 +63,7 @@ namespace SimpleFarmingGame.Game
             EventSystem.AfterSceneLoadedEvent -= EnableInput;
             EventSystem.MoveToPositionEvent -= OnMoveToPositionEvent;
             EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
             EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 

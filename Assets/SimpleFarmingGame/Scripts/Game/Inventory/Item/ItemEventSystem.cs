@@ -12,11 +12,11 @@ namespace SimpleFarmingGame.Game
             InstantiateItemInScene?.Invoke(itemID, position);
         }
 
-        public static event Action<int, Vector3, ItemType> DropItemEvent;
+        public static event Action<int, Vector3, ItemType> OnDropItemEvent;
 
         public static void CallDropItemEvent(int itemID, Vector3 position, ItemType itemType)
         {
-            DropItemEvent?.Invoke(itemID, position, itemType);
+            OnDropItemEvent?.Invoke(itemID, position, itemType);
         }
     }
 }

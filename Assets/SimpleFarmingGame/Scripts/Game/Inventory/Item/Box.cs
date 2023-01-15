@@ -4,41 +4,42 @@ namespace SimpleFarmingGame.Game
 {
     public class Box : MonoBehaviour
     {
-        public InventoryBagSO BoxBagTemplate;
-        public InventoryBagSO BoxBagData;
+        [SerializeField] private InventoryBagSO BoxBagTemplate;
+        [SerializeField] private InventoryBagSO m_BoxBagData;
 
-        public GameObject RightMouseButtonSign;
-        public int Index;
+        [SerializeField] private GameObject RightMouseButtonSign;
+        public int BoxIndex;
 
         private bool m_CanOpen;
         private bool m_IsOpened;
-
-        private void OnEnable()
-        {
-            if (BoxBagData == null)
-            {
-                BoxBagData = Instantiate(BoxBagTemplate);
-            }
-        }
+        public InventoryBagSO BoxBagData => m_BoxBagData;
 
         private void Update()
         {
             if (m_IsOpened == false && m_CanOpen && Input.GetMouseButtonDown(1))
             {
-                Game.EventSystem.CallBaseBagOpenEvent(SlotType.Box, BoxBagData);
+                EventSystem.CallBaseBagOpenEvent(SlotType.Box, m_BoxBagData);
                 m_IsOpened = true;
             }
 
             if (m_CanOpen == false && m_IsOpened)
             {
-                Game.EventSystem.CallBaseBagCloseEvent(SlotType.Box, BoxBagData);
+                EventSystem.CallBaseBagCloseEvent(SlotType.Box, m_BoxBagData);
                 m_IsOpened = false;
             }
 
             if (m_IsOpened && Input.GetKeyDown(KeyCode.Escape))
             {
-                Game.EventSystem.CallBaseBagCloseEvent(SlotType.Box, BoxBagData);
+                EventSystem.CallBaseBagCloseEvent(SlotType.Box, m_BoxBagData);
                 m_IsOpened = false;
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (m_BoxBagData == null)
+            {
+                m_BoxBagData = Instantiate(BoxBagTemplate);
             }
         }
 
@@ -60,17 +61,17 @@ namespace SimpleFarmingGame.Game
             }
         }
 
-        public void InitializeBox(int boxIndex )
+        public void InitializeBox(int boxIndex)
         {
-            Index = boxIndex;
-            string key = name + Index;
+            BoxIndex = boxIndex;
+            string key = name + BoxIndex;
             if (InventoryManager.Instance.GetBoxDataList(key) != null) // 刷新地图读取数据
             {
-                BoxBagData.ItemList = InventoryManager.Instance.GetBoxDataList(key);
+                m_BoxBagData.ItemList = InventoryManager.Instance.GetBoxDataList(key);
             }
             else // 新建格子
             {
-                InventoryManager.Instance.AddBoxDataDict(this);
+                InventoryManager.Instance.AddDataToStorageBoxDataDict(this);
             }
         }
     }

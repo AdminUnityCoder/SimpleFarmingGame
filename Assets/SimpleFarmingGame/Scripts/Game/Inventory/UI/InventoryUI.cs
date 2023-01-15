@@ -42,8 +42,8 @@ namespace SimpleFarmingGame.Game
         {
             EventSystem.RefreshInventoryUI += OnUpdateInventoryUI;
             EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            EventSystem.BaseBagOpenEvent += OnBaseBagOpenEvent;
-            EventSystem.BaseBagCloseEvent += OnBaseBagCloseEvent;
+            EventSystem.OnBaseBagOpenEvent += OnBaseBagOpenEvent;
+            EventSystem.OnBaseBagCloseEvent += OnBaseBagCloseEvent;
             EventSystem.ShowTransactionUIEvent += OnShowTransactionUIEvent;
         }
 
@@ -51,8 +51,8 @@ namespace SimpleFarmingGame.Game
         {
             EventSystem.RefreshInventoryUI -= OnUpdateInventoryUI;
             EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            EventSystem.BaseBagOpenEvent -= OnBaseBagOpenEvent;
-            EventSystem.BaseBagCloseEvent -= OnBaseBagCloseEvent;
+            EventSystem.OnBaseBagOpenEvent -= OnBaseBagOpenEvent;
+            EventSystem.OnBaseBagCloseEvent -= OnBaseBagCloseEvent;
             EventSystem.ShowTransactionUIEvent -= OnShowTransactionUIEvent;
         }
 

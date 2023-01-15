@@ -12,11 +12,11 @@ namespace SimpleFarmingGame.Game
             RefreshCurrentSceneMap?.Invoke();
         }
 
-        public static event Action<int, Vector3> BuildFurnitureEvent;
+        public static event Action<int, Vector3> OnBuildFurnitureEvent;
 
         public static void CallBuildFurnitureEvent(int buildingPaperID, Vector3 mouseWorldPosition)
         {
-            BuildFurnitureEvent?.Invoke(buildingPaperID, mouseWorldPosition);
+            OnBuildFurnitureEvent?.Invoke(buildingPaperID, mouseWorldPosition);
         }
     }
 }

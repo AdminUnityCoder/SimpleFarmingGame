@@ -91,7 +91,7 @@ namespace SimpleFarmingGame.Game
             EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
             EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.GameHourMinuteChangeEvent += OnGameHourMinuteChangeEvent;
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
@@ -100,7 +100,7 @@ namespace SimpleFarmingGame.Game
             EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
             EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.GameHourMinuteChangeEvent -= OnGameHourMinuteChangeEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
         }
 

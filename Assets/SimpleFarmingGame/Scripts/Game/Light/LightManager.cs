@@ -21,14 +21,14 @@ namespace SimpleFarmingGame.Game
         {
             EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.LightShiftChangeEvent += OnLightShiftChangeEvent;
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.LightShiftChangeEvent -= OnLightShiftChangeEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
         }
 
         private void OnAfterSceneLoadedEvent()

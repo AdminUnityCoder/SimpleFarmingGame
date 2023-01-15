@@ -47,21 +47,21 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.InstantiateItemInScene += OnInstantiateItemInScene;
-            EventSystem.DropItemEvent += OnDropItemEvent;
+            EventSystem.OnDropItemEvent += OnDropItemEvent;
             EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
             EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            EventSystem.BuildFurnitureEvent += OnBuildFurnitureEvent;
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent; // UI
+            EventSystem.OnBuildFurnitureEvent += BuildFurniture;
+            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent; // UI
         }
 
         private void OnDisable()
         {
             EventSystem.InstantiateItemInScene -= OnInstantiateItemInScene;
-            EventSystem.DropItemEvent -= OnDropItemEvent;
+            EventSystem.OnDropItemEvent -= OnDropItemEvent;
             EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
             EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            EventSystem.BuildFurnitureEvent -= OnBuildFurnitureEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent; // UI
+            EventSystem.OnBuildFurnitureEvent -= BuildFurniture;
+            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent; // UI
         }
 
         private void Start()
@@ -101,8 +101,12 @@ namespace SimpleFarmingGame.Game
             RebuildFurnitureIsScene();
         }
 
-        // 点击鼠标在地图上生成家具
-        private void OnBuildFurnitureEvent(int buildingPaperID, Vector3 mouseWorldPosition)
+        /// <summary>
+        /// 点击鼠标在地图上生成家具
+        /// </summary>
+        /// <param name="buildingPaperID">家具建造图纸ID</param>
+        /// <param name="mouseWorldPosition">鼠标世界坐标</param>
+        private void BuildFurniture(int buildingPaperID, Vector3 mouseWorldPosition)
         {
             BluePrintDetails bluePrintDetails
                 = InventoryManager.Instance.BluePrintData.GetBluePrintDetails(buildingPaperID);
@@ -110,8 +114,8 @@ namespace SimpleFarmingGame.Game
                 Instantiate(bluePrintDetails.BuildItemPrefab, mouseWorldPosition, Quaternion.identity, m_ItemParent);
             if (furniture.TryGetComponent(out Box box))
             {
-                box.Index = InventoryManager.Instance.BoxDataCount;
-                box.InitializeBox(box.Index);
+                box.BoxIndex = InventoryManager.Instance.BoxDataCount;
+                box.InitializeBox(box.BoxIndex);
             }
         }
 
@@ -217,7 +221,7 @@ namespace SimpleFarmingGame.Game
 
                 if (furniture.TryGetComponent(out Box box))
                 {
-                    sceneFurniture.BoxIndex = box.Index;
+                    sceneFurniture.BoxIndex = box.BoxIndex;
                 }
 
                 currentSceneFurnitureList.Add(sceneFurniture);

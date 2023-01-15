@@ -14,14 +14,14 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.TransitionEvent += OnTransitionEvent;
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.TransitionEvent -= OnTransitionEvent;
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
             EventSystem.EndGameEvent -= OnEndGameEvent;
         }
 

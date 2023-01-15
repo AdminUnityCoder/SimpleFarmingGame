@@ -6,11 +6,11 @@ namespace SimpleFarmingGame.Game
 {
     public static partial class EventSystem
     {
-        public static event Action<int> StartNewGameEvent;
+        public static event Action<int> OnStartNewGameEvent;
 
         public static void CallStartNewGameEvent(int index)
         {
-            StartNewGameEvent?.Invoke(index);
+            OnStartNewGameEvent?.Invoke(index);
         }
 
         public static event Action EndGameEvent;

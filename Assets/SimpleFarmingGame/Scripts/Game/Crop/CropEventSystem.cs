@@ -5,11 +5,11 @@ namespace SimpleFarmingGame.Game
 {
     public static partial class EventSystem
     {
-        public static event Action<int> SpawnFruitAtPlayerPosition;
+        public static event Action<int> OnSpawnFruitAtPlayerPosition;
 
         public static void CallSpawnFruitAtPlayerPosition(int itemID)
         {
-            SpawnFruitAtPlayerPosition?.Invoke(itemID);
+            OnSpawnFruitAtPlayerPosition?.Invoke(itemID);
         }
 
         public static event Action<ParticleEffectType, Vector3> ParticleEffectEvent;

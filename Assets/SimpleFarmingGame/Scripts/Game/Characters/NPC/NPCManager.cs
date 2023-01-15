@@ -21,12 +21,12 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.StartNewGameEvent += OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
         }
 
         private void OnDisable()
         {
-            EventSystem.StartNewGameEvent -= OnStartNewGameEvent;
+            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
         }
 
         private void OnStartNewGameEvent(int obj)
