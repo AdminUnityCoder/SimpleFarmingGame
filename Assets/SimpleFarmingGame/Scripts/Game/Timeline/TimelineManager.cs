@@ -27,12 +27,12 @@ namespace SimpleFarmingGame.Game
         {
             // m_CurrentDirector.played += OnTimelinePlayed;
             // m_CurrentDirector.stopped += OnTimelineStopped;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
 
         private void Update()

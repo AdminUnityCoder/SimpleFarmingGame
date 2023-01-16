@@ -84,7 +84,7 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.ItemSelectedEvent += SwitchPlayerActionAndSetupHoldItemSprite;
-            EventSystem.BeforeSceneUnloadedEvent += ResetPlayerState;
+            EventSystem.OnBeforeSceneUnloadedEvent += ResetPlayerState;
             EventSystem.MouseClickedEvent += OnMouseClickedEvent;
             EventSystem.OnSpawnFruitAtPlayerPosition += ShowHarvestFruitSprite;
         }
@@ -92,7 +92,7 @@ namespace SimpleFarmingGame.Game
         private void OnDisable()
         {
             EventSystem.ItemSelectedEvent -= SwitchPlayerActionAndSetupHoldItemSprite;
-            EventSystem.BeforeSceneUnloadedEvent -= ResetPlayerState;
+            EventSystem.OnBeforeSceneUnloadedEvent -= ResetPlayerState;
             EventSystem.MouseClickedEvent -= OnMouseClickedEvent;
             EventSystem.OnSpawnFruitAtPlayerPosition -= ShowHarvestFruitSprite;
         }

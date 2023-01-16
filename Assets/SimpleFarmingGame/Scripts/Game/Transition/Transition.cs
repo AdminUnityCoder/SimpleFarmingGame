@@ -12,18 +12,18 @@ namespace SimpleFarmingGame.Game
             TransitionEvent?.Invoke(sceneName, position);
         }
 
-        public static event Action BeforeSceneUnloadedEvent;
+        public static event Action OnBeforeSceneUnloadedEvent;
 
         public static void CallBeforeSceneUnloadedEvent()
         {
-            BeforeSceneUnloadedEvent?.Invoke();
+            OnBeforeSceneUnloadedEvent?.Invoke();
         }
 
-        public static event Action AfterSceneLoadedEvent;
+        public static event Action OnAfterSceneLoadedEvent;
 
         public static void CallAfterSceneLoadedEvent()
         {
-            AfterSceneLoadedEvent?.Invoke();
+            OnAfterSceneLoadedEvent?.Invoke();
         }
 
         public static event Action<Vector3> MoveToPositionEvent;

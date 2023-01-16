@@ -41,7 +41,7 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.RefreshInventoryUI += OnUpdateInventoryUI;
-            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
             EventSystem.OnBaseBagOpenEvent += OnBaseBagOpenEvent;
             EventSystem.OnBaseBagCloseEvent += OnBaseBagCloseEvent;
             EventSystem.ShowTransactionUIEvent += OnShowTransactionUIEvent;
@@ -50,7 +50,7 @@ namespace SimpleFarmingGame.Game
         private void OnDisable()
         {
             EventSystem.RefreshInventoryUI -= OnUpdateInventoryUI;
-            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
             EventSystem.OnBaseBagOpenEvent -= OnBaseBagOpenEvent;
             EventSystem.OnBaseBagCloseEvent -= OnBaseBagCloseEvent;
             EventSystem.ShowTransactionUIEvent -= OnShowTransactionUIEvent;

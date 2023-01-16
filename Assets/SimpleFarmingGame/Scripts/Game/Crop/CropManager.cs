@@ -13,14 +13,14 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.UpdateSceneCropEvent += OnUpdateSceneCropEvent;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.GameDayChangeEvent += OnGameDayChangeEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.UpdateSceneCropEvent -= OnUpdateSceneCropEvent;
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.GameDayChangeEvent -= OnGameDayChangeEvent;
         }
 

@@ -14,12 +14,12 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.AfterSceneLoadedEvent += SwitchConfinerShape;
+            EventSystem.OnAfterSceneLoadedEvent += SwitchConfinerShape;
         }
 
         private void OnDisable()
         {
-            EventSystem.AfterSceneLoadedEvent -= SwitchConfinerShape;
+            EventSystem.OnAfterSceneLoadedEvent -= SwitchConfinerShape;
         }
 
         private void SwitchConfinerShape()

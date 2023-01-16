@@ -29,15 +29,15 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.ItemSelectedEvent += OnItemSelectedEvent;
-            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
         }
 
         private void OnDisable()
         {
             EventSystem.ItemSelectedEvent -= OnItemSelectedEvent;
-            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
         }
 
         private void Start()
@@ -305,7 +305,7 @@ namespace SimpleFarmingGame.Game
                 case ItemType.Furniture:
                     m_BuildImage.gameObject.SetActive(true);
                     BluePrintDetails bluePrintDetails =
-                        InventoryManager.Instance.BluePrintData.GetBluePrintDetails(m_CurrentItemDetails.ItemID);
+                        InventoryManager.Instance.GetBluePrintDetails(m_CurrentItemDetails.ItemID);
                     if (tileDetails.CanPlaceFurniture
                      && InventoryManager.Instance.CheckBuildingResourcesStock(m_CurrentItemDetails.ItemID)
                      && !CheckForFurnitureNearby(bluePrintDetails))

@@ -48,7 +48,6 @@ namespace SimpleFarmingGame.Game
             }
             else
             {
-                Debug.Log("NEW GAME");
                 EventSystem.CallStartNewGameEvent(Index);
             }
         }

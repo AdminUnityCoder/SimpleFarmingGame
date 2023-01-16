@@ -82,7 +82,7 @@ namespace SimpleFarmingGame.Game
         public void SetupRequireResourcePanel(int buildingPaperID)
         {
             BluePrintDetails bluePrintDetails
-                = InventoryManager.Instance.BluePrintData.GetBluePrintDetails(buildingPaperID);
+                = InventoryManager.Instance.GetBluePrintDetails(buildingPaperID);
             for (int i = 0; i < RequireResourceItems.Length; ++i) // 3个
             {
                 if (i < bluePrintDetails.RequireResourceItems.Length) // 蓝图中的需求的个数

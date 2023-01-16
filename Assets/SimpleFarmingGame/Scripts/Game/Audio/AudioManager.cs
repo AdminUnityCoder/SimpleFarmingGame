@@ -25,14 +25,14 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.PlaySoundEvent += OnPlaySoundEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
         }
 
         private void OnDisable()
         {
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.PlaySoundEvent -= OnPlaySoundEvent;
             EventSystem.EndGameEvent -= OnEndGameEvent;
         }

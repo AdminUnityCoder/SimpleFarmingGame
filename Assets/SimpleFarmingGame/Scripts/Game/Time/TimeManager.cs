@@ -38,8 +38,8 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.UpdateGameStateEvent += OnUpdateGameStateEvent;
             EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
@@ -47,8 +47,8 @@ namespace SimpleFarmingGame.Game
 
         private void OnDisable()
         {
-            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.UpdateGameStateEvent -= OnUpdateGameStateEvent;
             EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
             EventSystem.EndGameEvent -= OnEndGameEvent;
@@ -115,7 +115,6 @@ namespace SimpleFarmingGame.Game
         {
             InitGameTime();
             m_GameClockPause = false; // 此处是否多余，因为 OnAfterSceneLoadedEvent() 中已经设置过一次
-            Debug.Log(m_GameClockPause);
         }
 
         private void OnEndGameEvent()

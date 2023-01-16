@@ -8,8 +8,9 @@ namespace SimpleFarmingGame.Game
         [SerializeField, Tooltip("物品数据")] private ItemDataListSO ItemData;
         [SerializeField, Tooltip("玩家背包数据模板")] private InventoryBagSO PlayerBagDataTemplate;
         [SerializeField, Tooltip("玩家背包数据")] private InventoryBagSO PlayerBagData;
-        [SerializeField, Tooltip("蓝图数据")] private BluePrintDataListSO m_BluePrintData;
-        [SerializeField, Tooltip("玩家金钱数")] private int m_PlayerMoney;
+        [SerializeField, Tooltip("蓝图数据")] private BluePrintDataListSO BluePrintData;
+
+        private int m_PlayerMoney = 300;
         private InventoryBagSO m_CurrentStorageBoxData;
 
         /// <summary>
@@ -17,7 +18,6 @@ namespace SimpleFarmingGame.Game
         /// </summary>
         private Dictionary<string, List<InventoryItem>> m_StorageBoxDataDict = new();
 
-        public BluePrintDataListSO BluePrintData => m_BluePrintData;
         public int PlayerMoney => m_PlayerMoney;
         public int BoxDataCount => m_StorageBoxDataDict.Count;
 
@@ -50,6 +50,11 @@ namespace SimpleFarmingGame.Game
             return ItemData.GetItemDetails(itemID);
         }
 
+        public BluePrintDetails GetBluePrintDetails(int buildingPaperID)
+        {
+            return BluePrintData.GetBluePrintDetails(buildingPaperID);
+        }
+
         /// <summary>
         /// 通过库存位置获取物品列表
         /// </summary>
@@ -74,7 +79,7 @@ namespace SimpleFarmingGame.Game
         /// <returns>库存均满足需求返回true，反之返回false</returns>
         public bool CheckBuildingResourcesStock(int buildingPaperID)
         {
-            BluePrintDetails bluePrintDetails = m_BluePrintData.GetBluePrintDetails(buildingPaperID);
+            BluePrintDetails bluePrintDetails = GetBluePrintDetails(buildingPaperID);
             foreach (InventoryItem requireResourceItem in bluePrintDetails.RequireResourceItems)
             {
                 int playerBagItemAmount = PlayerBagData.GetInventoryItem(requireResourceItem.ItemID).ItemAmount;
@@ -315,7 +320,7 @@ namespace SimpleFarmingGame.Game
         #region Event
 
         /// <summary>
-        /// 丢弃物品
+        /// 丢弃物品 -> 数据上
         /// </summary>
         /// <param name="itemID">丢弃物品ID</param>
         /// <param name="position">丢弃位置</param>
@@ -346,7 +351,7 @@ namespace SimpleFarmingGame.Game
             // 移除建造图纸
             RemoveItem(buildingPaperID, 1);
             // 移除所需资源
-            BluePrintDetails bluePrintDetails = m_BluePrintData.GetBluePrintDetails(buildingPaperID);
+            BluePrintDetails bluePrintDetails = GetBluePrintDetails(buildingPaperID);
             foreach (InventoryItem resourceItem in bluePrintDetails.RequireResourceItems)
             {
                 RemoveItem(resourceItem.ItemID, resourceItem.ItemAmount);

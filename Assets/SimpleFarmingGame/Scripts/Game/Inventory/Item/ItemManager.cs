@@ -1,68 +1,25 @@
-using System;
 using System.Collections.Generic;
+using MyFramework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace SimpleFarmingGame.Game
 {
-    [Serializable]
-    public class SerializableVector3
-    {
-        public float X, Y, Z;
-
-        public SerializableVector3(Vector3 position)
-        {
-            X = position.x;
-            Y = position.y;
-            Z = position.z;
-        }
-
-        public Vector3 ToVector3()
-        {
-            return new Vector3(X, Y, Z);
-        }
-
-        public Vector2Int ToVector2Int()
-        {
-            return new Vector2Int((int)X, (int)Y);
-        }
-    }
-
-    [Serializable]
-    public class SceneItem
-    {
-        public int ItemID;
-        public SerializableVector3 Coordinate;
-    }
-
     public class ItemManager : MonoBehaviour, ISavable
     {
-        public Item ItemBasePrefab;
-        public Item BounceItemPrefab;
+        [SerializeField] private Item ItemBasePrefab;
+        [SerializeField] private Item BounceItemPrefab;
         private Transform m_ItemParent;
 
-        private Dictionary<string, List<SceneItem>> m_SceneItemDict = new();
+        /// <summary>
+        /// 场景家具字典<br/>key：场景名字，value：场景家具列表
+        /// </summary>
         private Dictionary<string, List<SceneFurniture>> m_SceneFurnitureDict = new();
 
-        private void OnEnable()
-        {
-            EventSystem.InstantiateItemInScene += OnInstantiateItemInScene;
-            EventSystem.OnDropItemEvent += OnDropItemEvent;
-            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
-            EventSystem.OnBuildFurnitureEvent += BuildFurniture;
-            EventSystem.OnStartNewGameEvent += OnStartNewGameEvent; // UI
-        }
-
-        private void OnDisable()
-        {
-            EventSystem.InstantiateItemInScene -= OnInstantiateItemInScene;
-            EventSystem.OnDropItemEvent -= OnDropItemEvent;
-            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
-            EventSystem.OnBuildFurnitureEvent -= BuildFurniture;
-            EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent; // UI
-        }
+        /// <summary>
+        /// 场景物品字典<br/>key：场景名字，value：场景家具列表
+        /// </summary>
+        private Dictionary<string, List<SceneItem>> m_SceneItemDict = new();
 
         private void Start()
         {
@@ -70,207 +27,241 @@ namespace SimpleFarmingGame.Game
             savable.RegisterSavable();
         }
 
-        private void OnInstantiateItemInScene(int itemID, Vector3 position)
+        private void OnEnable()
         {
-            // FIXME: 此处可以使用工厂模式减少耦合
+            EventSystem.OnInstantiateItemInScene += InstantiateItem;
+            EventSystem.OnDropItemEvent += DropItem;
+            EventSystem.OnBeforeSceneUnloadedEvent += GetAllObjectsInScene;
+            EventSystem.OnAfterSceneLoadedEvent += RegenerateObjectsInScene;
+            EventSystem.OnBuildFurnitureEvent += BuildFurniture;
+            EventSystem.OnStartNewGameEvent += ClearAllObjectsDictionary;
+        }
+
+        private void OnDisable()
+        {
+            EventSystem.OnInstantiateItemInScene -= InstantiateItem;
+            EventSystem.OnDropItemEvent -= DropItem;
+            EventSystem.OnBeforeSceneUnloadedEvent -= GetAllObjectsInScene;
+            EventSystem.OnAfterSceneLoadedEvent -= RegenerateObjectsInScene;
+            EventSystem.OnBuildFurnitureEvent -= BuildFurniture;
+            EventSystem.OnStartNewGameEvent -= ClearAllObjectsDictionary;
+        }
+
+        #region Event
+
+        /// <summary>
+        /// 生成物品
+        /// </summary>
+        /// <param name="itemID">物品ID</param>
+        /// <param name="position">物品位置</param>
+        private void InstantiateItem(int itemID, Vector3 position)
+        {
             Item item = Instantiate(BounceItemPrefab, position, Quaternion.identity, m_ItemParent);
             item.ItemID = itemID;
-            item.GetComponent<ItemBounce>().InitBounceItem(position, Vector2.up);
+            if (item.TryGetComponent<ItemBounce>(out var itemBounce))
+            {
+                itemBounce.InitBounceItem(position, Vector2.up);
+            }
         }
 
-        private void OnDropItemEvent(int itemID, Vector3 mousePosition, ItemType itemType)
+        /// <summary>
+        /// 丢弃物品 —> 视觉上
+        /// </summary>
+        /// <param name="itemID">丢弃物品的ID</param>
+        /// <param name="mouseWorldPos">鼠标世界坐标</param>
+        /// <param name="itemType">物品类型</param>
+        private void DropItem(int itemID, Vector3 mouseWorldPos, ItemType itemType)
         {
             if (itemType == ItemType.Seed) return;
-            Vector3 PlayerPosition = Player.Instance.Position;
-            Item item = Instantiate(BounceItemPrefab, PlayerPosition, Quaternion.identity, m_ItemParent);
+            var playerPosition = Player.Instance.Position;
+            var direction = (mouseWorldPos - playerPosition).normalized;
+            var item = Instantiate(BounceItemPrefab, playerPosition, Quaternion.identity, m_ItemParent);
             item.ItemID = itemID;
-            Vector3 direction = (mousePosition - PlayerPosition).normalized;
-            item.GetComponent<ItemBounce>().InitBounceItem(mousePosition, direction);
+            // TODO: 待添加功能 -> 扔东西同时改变玩家朝向
+            if (item.TryGetComponent<ItemBounce>(out var itemBounce))
+            {
+                itemBounce.InitBounceItem(mouseWorldPos, direction);
+            }
         }
 
-        private void OnBeforeSceneUnloadedEvent()
+        /// <summary>
+        /// 获取场景中所有对象
+        /// </summary>
+        private void GetAllObjectsInScene()
         {
             GetAllItemsInScene();
             GetAllFurnitureInScene();
         }
 
-        private void OnAfterSceneLoadedEvent()
+        /// <summary>
+        /// 重新生成场景中所有对象
+        /// </summary>
+        private void RegenerateObjectsInScene()
         {
             m_ItemParent = GameObject.FindGameObjectWithTag("ItemParent").transform;
-            RegenerateAllItemsInScene();
-            RebuildFurnitureIsScene();
+            RegenerateItemsInScene();
+            RegenerateFurnitureIsScene();
         }
 
         /// <summary>
         /// 点击鼠标在地图上生成家具
         /// </summary>
         /// <param name="buildingPaperID">家具建造图纸ID</param>
-        /// <param name="mouseWorldPosition">鼠标世界坐标</param>
-        private void BuildFurniture(int buildingPaperID, Vector3 mouseWorldPosition)
+        /// <param name="mouseWorldPos">鼠标世界坐标</param>
+        private void BuildFurniture(int buildingPaperID, Vector3 mouseWorldPos)
         {
-            BluePrintDetails bluePrintDetails
-                = InventoryManager.Instance.BluePrintData.GetBluePrintDetails(buildingPaperID);
-            GameObject furniture =
-                Instantiate(bluePrintDetails.BuildItemPrefab, mouseWorldPosition, Quaternion.identity, m_ItemParent);
-            if (furniture.TryGetComponent(out Box box))
-            {
-                box.BoxIndex = InventoryManager.Instance.BoxDataCount;
-                box.InitializeBox(box.BoxIndex);
-            }
+            var bluePrintDetails = InventoryManager.Instance.GetBluePrintDetails(buildingPaperID);
+            GameObject furniture = Instantiate
+            (
+                original: bluePrintDetails.BuildItemPrefab
+              , position: mouseWorldPos
+              , rotation: Quaternion.identity
+              , parent: m_ItemParent
+            );
+            if (!furniture.TryGetComponent(out Box box)) return;
+            box.BoxIndex = InventoryManager.Instance.BoxDataCount;
+            box.InitializeBox(box.BoxIndex);
         }
 
-        private void OnStartNewGameEvent(int obj)
+        /// <summary>
+        /// 清空 m_SceneItemDict 和 m_SceneFurnitureDict
+        /// </summary>
+        private void ClearAllObjectsDictionary(int obj)
         {
             m_SceneItemDict.Clear();
             m_SceneFurnitureDict.Clear();
         }
 
+        #endregion
+
+        #region Item
+
+        /// <summary>
+        /// 获取场景中所有物品
+        /// </summary>
         private void GetAllItemsInScene()
         {
-            #region Foreach all items in the current scene and add them to the "currentSceneItemList"
-
+            // 创建一个列表存储当前场景中的物品
             List<SceneItem> currentSceneItemList = new List<SceneItem>();
-
-            Item[] type = FindObjectsOfType<Item>();
-            for (var i = 0; i < type.Length; ++i)
+            Item[] items = FindObjectsOfType<Item>();
+            foreach (Item item in items)
             {
-                Item item = type[i];
-                SceneItem sceneItem = new SceneItem
-                {
-                    ItemID = item.ItemID
-                  , Coordinate = new SerializableVector3(item.transform.position)
-                };
+                SceneItem sceneItem = new SceneItem();
+                sceneItem.ItemID = item.ItemID;
+                sceneItem.Coordinate = new SerializableVector3(item.GetPosition());
 
                 currentSceneItemList.Add(sceneItem);
             }
 
-            #endregion
-
-            #region Update or add "currentSceneItemList" to the "sceneItemDict"
-
-            if (m_SceneItemDict.ContainsKey(SceneManager.GetActiveScene().name))
-            {
-                // Update the "SceneItemList" in the current active scene
-                m_SceneItemDict[SceneManager.GetActiveScene().name] = currentSceneItemList;
-            }
-            else
+            if (!m_SceneItemDict.ContainsKey(SceneManager.GetActiveScene().name))
             {
                 m_SceneItemDict.Add(SceneManager.GetActiveScene().name, currentSceneItemList);
             }
-
-            #endregion
-        }
-
-        private void RegenerateAllItemsInScene()
-        {
-            // List<SceneItem> currentSceneItemList = new List<SceneItem>();
-            if (m_SceneItemDict.TryGetValue
-            (
-                SceneManager.GetActiveScene().name
-              , out List<SceneItem> currentSceneItemList
-            ))
+            else
             {
-                if (currentSceneItemList != null)
-                {
-                    DestroyAllItemsInScene();
-
-                    GenerateItemsInTheList(currentSceneItemList);
-                }
+                m_SceneItemDict[SceneManager.GetActiveScene().name] = currentSceneItemList;
             }
         }
 
-        private static void DestroyAllItemsInScene()
-        {
-            Item[] items = FindObjectsOfType<Item>();
-            for (int i = 0; i < items.Length; ++i)
-            {
-                Destroy(items[i].gameObject);
-            }
-        }
-
-        private void GenerateItemsInTheList(IReadOnlyList<SceneItem> currentSceneItemList)
-        {
-            for (int i = 0; i < currentSceneItemList.Count; ++i)
-            {
-                SceneItem sceneItem = currentSceneItemList[i];
-
-                Item newItem = Instantiate
-                (
-                    ItemBasePrefab
-                  , sceneItem.Coordinate.ToVector3()
-                  , Quaternion.identity
-                  , m_ItemParent
-                );
-
-                newItem.Init(sceneItem.ItemID);
-            }
-        }
-
+        /// <summary>
+        /// 获取场景中所有家具类型的物体
+        /// </summary>
         private void GetAllFurnitureInScene()
         {
-            #region Foreach all furnitures in the current scene and add them to the "currentSceneFurnitureList"
-
-            List<SceneFurniture> currentSceneFurnitureList = new List<SceneFurniture>();
-            foreach (Furniture furniture in FindObjectsOfType<Furniture>())
+            List<SceneFurniture> curSceneFurnitureList = new List<SceneFurniture>();
+            Furniture[] furnitures = FindObjectsOfType<Furniture>();
+            foreach (Furniture furniture in furnitures)
             {
-                SceneFurniture sceneFurniture = new SceneFurniture
-                {
-                    FurnitureID = furniture.ID
-                  , Coordinate = new SerializableVector3(furniture.transform.position)
-                };
+                SceneFurniture sceneFurniture = new SceneFurniture();
+                sceneFurniture.FurnitureID = furniture.ID;
+                sceneFurniture.Coordinate = new SerializableVector3(furniture.GetPosition());
 
                 if (furniture.TryGetComponent(out Box box))
                 {
                     sceneFurniture.BoxIndex = box.BoxIndex;
                 }
 
-                currentSceneFurnitureList.Add(sceneFurniture);
+                curSceneFurnitureList.Add(sceneFurniture);
             }
 
-            #endregion
-
-            #region Update or add "currentSceneFurnitureList" to the "sceneFurnitureDict"
-
-            if (m_SceneFurnitureDict.ContainsKey(SceneManager.GetActiveScene().name))
+            if (!m_SceneFurnitureDict.ContainsKey(SceneManager.GetActiveScene().name))
             {
-                // Update the "SceneFurnitureList" in the current active scene
-                m_SceneFurnitureDict[SceneManager.GetActiveScene().name] = currentSceneFurnitureList;
+                m_SceneFurnitureDict.Add(SceneManager.GetActiveScene().name, curSceneFurnitureList);
             }
             else
             {
-                m_SceneFurnitureDict.Add(SceneManager.GetActiveScene().name, currentSceneFurnitureList);
+                m_SceneFurnitureDict[SceneManager.GetActiveScene().name] = curSceneFurnitureList;
+            }
+        }
+
+        /// <summary>
+        /// 重新生成场景中的物体
+        /// </summary>
+        private void RegenerateItemsInScene()
+        {
+            if (!m_SceneItemDict.TryGetValue(SceneManager.GetActiveScene().name, out var curSceneItemList)) return;
+            if (curSceneItemList == null) return;
+
+            #region 删除场景中的所有物体
+
+            Item[] items = FindObjectsOfType<Item>();
+
+            foreach (Item item in items)
+            {
+                item.DestroyGameObj();
+            }
+
+            #endregion
+
+            #region 重新生成列表中的物体
+
+            foreach (SceneItem sceneItem in curSceneItemList)
+            {
+                Item newItem = Instantiate
+                (
+                    original: ItemBasePrefab
+                  , position: sceneItem.Coordinate.ToVector3()
+                  , rotation: Quaternion.identity
+                  , parent: m_ItemParent
+                );
+
+                newItem.Init(sceneItem.ItemID);
             }
 
             #endregion
         }
 
-        private void RebuildFurnitureIsScene()
+        /// <summary>
+        /// 重新生成场景中的家具
+        /// </summary>
+        private void RegenerateFurnitureIsScene()
         {
-            List<SceneFurniture> currentSceneFurnitureList = new List<SceneFurniture>();
-            if (m_SceneFurnitureDict.TryGetValue(SceneManager.GetActiveScene().name, out currentSceneFurnitureList))
+            if (!m_SceneFurnitureDict.TryGetValue(SceneManager.GetActiveScene().name, out var curSceneFurnitureList))
+                return;
+            if (curSceneFurnitureList == null) return;
+
+            foreach (SceneFurniture sceneFurniture in curSceneFurnitureList)
             {
-                if (currentSceneFurnitureList != null)
+                var bluePrintDetails = InventoryManager.Instance.GetBluePrintDetails(sceneFurniture.FurnitureID);
+
+                GameObject furniture = Instantiate
+                (
+                    original: bluePrintDetails.BuildItemPrefab
+                  , position: sceneFurniture.Coordinate.ToVector3()
+                  , rotation: Quaternion.identity
+                  , parent: m_ItemParent
+                );
+
+                if (furniture.TryGetComponent(out Box box))
                 {
-                    foreach (SceneFurniture sceneFurniture in currentSceneFurnitureList)
-                    {
-                        BluePrintDetails bluePrintDetails
-                            = InventoryManager.Instance.BluePrintData.GetBluePrintDetails(sceneFurniture.FurnitureID);
-                        GameObject furniture =
-                            Instantiate
-                            (
-                                bluePrintDetails.BuildItemPrefab
-                              , sceneFurniture.Coordinate.ToVector3()
-                              , Quaternion.identity
-                              , m_ItemParent
-                            );
-                        if (furniture.TryGetComponent(out Box box))
-                        {
-                            box.InitializeBox(sceneFurniture.BoxIndex);
-                        }
-                    }
+                    box.InitializeBox(sceneFurniture.BoxIndex);
                 }
             }
         }
+
+        #endregion
+
+        #region Save
 
         public string GUID => GetComponent<DataGUID>().GUID;
 
@@ -289,8 +280,10 @@ namespace SimpleFarmingGame.Game
             m_SceneItemDict = saveData.SceneItemDict;
             m_SceneFurnitureDict = saveData.SceneFurnitureDict;
 
-            RegenerateAllItemsInScene();
-            RebuildFurnitureIsScene();
+            RegenerateItemsInScene();
+            RegenerateFurnitureIsScene();
         }
+
+        #endregion
     }
 }

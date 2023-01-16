@@ -88,8 +88,8 @@ namespace SimpleFarmingGame.Game
 
         private void OnEnable()
         {
-            EventSystem.BeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent += OnBeforeSceneUnloadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.GameHourMinuteChangeEvent += OnGameHourMinuteChangeEvent;
             EventSystem.OnStartNewGameEvent += OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;
@@ -97,8 +97,8 @@ namespace SimpleFarmingGame.Game
 
         private void OnDisable()
         {
-            EventSystem.BeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnBeforeSceneUnloadedEvent -= OnBeforeSceneUnloadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.GameHourMinuteChangeEvent -= OnGameHourMinuteChangeEvent;
             EventSystem.OnStartNewGameEvent -= OnStartNewGameEvent;
             EventSystem.EndGameEvent += OnEndGameEvent;

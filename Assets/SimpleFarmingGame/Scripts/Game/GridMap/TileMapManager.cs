@@ -31,7 +31,7 @@ namespace SimpleFarmingGame.Game
         private void OnEnable()
         {
             EventSystem.ExecuteActionAfterAnimation += OnExecuteActionAfterAnimation;
-            EventSystem.AfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent += OnAfterSceneLoadedEvent;
             EventSystem.GameDayChangeEvent += OnGameDayChangeEvent;
             EventSystem.RefreshCurrentSceneMap += RefreshMap;
         }
@@ -39,7 +39,7 @@ namespace SimpleFarmingGame.Game
         private void OnDisable()
         {
             EventSystem.ExecuteActionAfterAnimation -= OnExecuteActionAfterAnimation;
-            EventSystem.AfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
+            EventSystem.OnAfterSceneLoadedEvent -= OnAfterSceneLoadedEvent;
             EventSystem.GameDayChangeEvent -= OnGameDayChangeEvent;
             EventSystem.RefreshCurrentSceneMap -= RefreshMap;
         }
